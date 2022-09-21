@@ -2,8 +2,8 @@
 
 ## Database Schema Design
 
-`<![shcema-selfmade](https://user-images.githubusercontent.com/106496513/191614526-bc7d9ce7-ea28-4ab9-9389-3b43d8046dfe.png)
-insert database schema design here>`
+![shcema-selfmade](https://user-images.githubusercontent.com/106496513/191614608-324697b1-5aa1-4d17-b0a5-ded0ca90fe42.png)
+
 
 ## API Documentation
 
