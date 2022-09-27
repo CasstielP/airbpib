@@ -10,6 +10,42 @@ module.exports = (sequelize, DataTypes) => {
     }
     static associate(models) {
       // define association here
+      //one-to-many(user->review)
+      User.hasMany(
+        models.Review,
+        {
+          foreignKey:'userId',
+          onDelete: 'CASCADE',
+          hooks: true
+        }
+      )
+      //many-to-many(user-booking-spot)
+      User.belongsToMany(
+        models.Spot,
+        {
+          through: models.Booking,
+          foreignKey: 'userId',
+          otherKey: 'spotId'
+        }
+      )
+      //many-to-many(user-review-spot)
+      User.belongsToMany(
+        models.Spot,
+        {
+          through: models.Review,
+          foreignKey: 'userId',
+          otherKey: 'spotId'
+        }
+      )
+      //one-to-many (user-spot)
+      User.hasMany(
+        models.Spot,
+        {
+          foreignKey: 'ownerId',
+          onDelete: 'cascade',
+          hooks: true
+        }
+      )
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
@@ -56,6 +92,14 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
