@@ -9,29 +9,29 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-router.post(
-    '/',
-    async (req, res) => {
-      const { email, password, username } = req.body;
-      const user = await User.signup({ email, username, password });
+// router.post(
+//     '/',
+//     async (req, res) => {
+//       const { email, password, username } = req.body;
+//       const user = await User.signup({ email, username, password });
 
-      await setTokenCookie(res, user);
+//       await setTokenCookie(res, user);
 
-      return res.json({
-        user
-      });
-    }
-  );
+//       return res.json({
+//         user
+//       });
+//     }
+//   );
 
   const validateSignup = [
     check('email')
       .exists({ checkFalsy: true })
       .isEmail()
-      .withMessage('Please provide a valid email.'),
+      .withMessage('Ivalid email.'),
     check('username')
       .exists({ checkFalsy: true })
       .isLength({ min: 4 })
-      .withMessage('Please provide a username with at least 4 characters.'),
+      .withMessage('Username is required'),
     check('username')
       .not()
       .isEmail()
@@ -40,6 +40,12 @@ router.post(
       .exists({ checkFalsy: true })
       .isLength({ min: 6 })
       .withMessage('Password must be 6 characters or more.'),
+      check('firstName')
+      .exists({checkFalsy: true})
+      .withMessage('First name is required'),
+      check('lastName')
+      .exists({checkFalsy: true})
+      .withMessage('Last name is required'),
     handleValidationErrors
   ];
 
@@ -49,8 +55,46 @@ router.post(
   '/',
   validateSignup,
   async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+    const { firstName, lastName, email, username, password} = req.body;
+
+
+
+
+    const existEmail = await User.findOne({
+      where:{
+        email: email
+      }
+    })
+    const existUsername = await User.findOne({
+      where: {
+        username: username
+      }
+    })
+    if(existEmail) {
+      res.status(403)
+      res.json({
+        message: "User already exists",
+        statusCode: res.statusCode,
+        errors: {
+          email: "User with that email already exists"
+        }
+      })
+    }
+    if(existUsername) {
+      res.status(403)
+      res.json({
+        message: "User already exists",
+        statusCode: res.statusCode,
+        errors: {
+          email: "User with that username already exists"
+        }
+      })
+    }
+
+
+
+
+    const user = await User.signup({firstName, lastName, email, username, password });
 
     await setTokenCookie(res, user);
 
