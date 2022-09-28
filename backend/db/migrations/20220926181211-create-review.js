@@ -13,7 +13,6 @@ module.exports = {
         allowNull: false,
         references: {model: 'Spots'},
         onDelete: 'CASCADE'
-
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -26,7 +25,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       stars: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,

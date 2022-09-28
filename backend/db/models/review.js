@@ -18,12 +18,20 @@ module.exports = (sequelize, DataTypes) => {
       )
       //many-to-many(user-review-spot)
       Review.belongsTo(models.User, {foreignKey: 'userId'})
-      Review.belongsTo(models.Spot, {foreignKey: 'spotId'})
+      // Review.belongsTo(models.Spot, {foreignKey: 'spotId'})
       //one-to-many(review-reviewImage)
       Review.hasMany(
         models.ReviewImage,
         {
           foreignKey: 'reviewId',
+          onDelete: 'CASCADE',
+          hooks: true
+        }
+      )
+      Review.belongsTo(
+        models.Spot,
+        {
+          foreignKey: 'spotId',
           onDelete: 'CASCADE',
           hooks: true
         }
@@ -45,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     stars: {
-      type: DataTypes.INTEGER
+      type: DataTypes.FLOAT
     }
   }, {
     sequelize,

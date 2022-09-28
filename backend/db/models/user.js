@@ -20,30 +20,31 @@ module.exports = (sequelize, DataTypes) => {
         }
       )
       //many-to-many(user-booking-spot)
-      User.belongsToMany(
-        models.Spot,
-        {
-          through: models.Booking,
-          foreignKey: 'userId',
-          otherKey: 'spotId'
-        }
-      )
-      //many-to-many(user-review-spot)
-      User.belongsToMany(
-        models.Spot,
-        {
-          through: models.Review,
-          foreignKey: 'userId',
-          otherKey: 'spotId'
-        }
-      )
+      // User.belongsToMany(
+      //   models.Spot,
+      //   {
+      //     through: models.Booking,
+      //     foreignKey: 'userId',
+      //     otherKey: 'spotId'
+      //   }
+      // )
+      // //many-to-many(user-review-spot)
+      // User.belongsToMany(
+      //   models.Spot,
+      //   {
+      //     through: models.Review,
+      //     foreignKey: 'userId',
+      //     otherKey: 'spotId'
+      //   }
+      // )
       //one-to-many (user-spot)
       User.hasMany(
         models.Spot,
         {
           foreignKey: 'ownerId',
           onDelete: 'cascade',
-          hooks: true
+          hooks: true,
+          as: 'Owner'
         }
       )
     }

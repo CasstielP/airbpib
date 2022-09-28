@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       //one-to-many(spot-spotImage)
       SpotImage.belongsTo(
         models.Spot,
-        {foreignKey: 'spotId'}
+        {foreignKey: 'spotId',
+         as: 'SpotImages'
+      }
       )
     }
   }

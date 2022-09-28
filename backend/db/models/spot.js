@@ -12,23 +12,23 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       //many-to-many(user-booking-spot)
-      Spot.belongsToMany(
-        models.User,
-        {
-          through: models.Booking,
-          foreignKey: 'spotId',
-          otherKey: 'userId'
-        }
-      )
-      //many-to-many(user-review-spot)
-      Spot.belongsToMany(
-        models.User,
-        {
-          through: models.Review,
-          foreignKey: 'spotId',
-          otherKey: 'userId'
-        }
-      )
+      // Spot.belongsToMany(
+      //   models.User,
+      //   {
+      //     through: models.Booking,
+      //     foreignKey: 'spotId',
+      //     otherKey: 'userId'
+      //   }
+      // )
+      // //many-to-many(user-review-spot)
+      // Spot.belongsToMany(
+      //   models.User,
+      //   {
+      //     through: models.Review,
+      //     foreignKey: 'spotId',
+      //     otherKey: 'userId'
+      //   }
+      // )
       //one-to-many(user-spot)
       Spot.belongsTo(
         models.User,
@@ -37,6 +37,14 @@ module.exports = (sequelize, DataTypes) => {
       //one-to-many(spot-spotImage)
       Spot.hasMany(
         models.SpotImage,
+        {
+          foreignKey: 'spotId',
+          onDelete: 'CASCADE',
+          hooks: true
+        }
+      )
+      Spot.hasMany(
+        models.Review,
         {
           foreignKey: 'spotId',
           onDelete: 'CASCADE',
