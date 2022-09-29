@@ -28,6 +28,14 @@ module.exports = (sequelize, DataTypes) => {
           hooks: true
         }
       )
+      Review.belongsTo(
+        models.Spot,
+        {
+          foreignKey: 'spotId',
+          // onDelete: 'CASCADE',
+          // hooks: true
+        }
+      )
     }
   }
   Review.init({
@@ -45,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     stars: {
-      type: DataTypes.INTEGER
+      type: DataTypes.FLOAT
     }
   }, {
     sequelize,

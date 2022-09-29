@@ -2,34 +2,55 @@
 const express = require('express')
 const router = express.Router();
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { ValidationError } = require('sequelize');
 // Log in
-router.post(
-    '/',
-    async (req, res, next) => {
-      const { credential, password } = req.body;
+// router.post(
+//     '/',
+//     async (req, res, next) => {
+//       const { credential, password } = req.body;
+//       if(!credential) {
+//         const err = new ValidationError('Email is required')
+//         return next(err)
+//       }
 
-      const user = await User.login({ credential, password });
+//       if(!password) {
+//         res.status(400)
+//         res.json({
+//           "message": "Validation error",
+//           "statusCode": res.statusCode,
+//           "errors": {
+//             "credential": "password is required"
+//           }
+//         })
+//       }
 
-      if (!user) {
-        const err = new Error('Login failed');
-        err.status = 401;
-        err.title = 'Login failed';
-        err.errors = ['The provided credentials were invalid.'];
-        return next(err);
-      }
+//       const user = await User.login({ credential, password });
 
-      await setTokenCookie(res, user);
+//       if (!user) {
+//         // const err = new Error('Login failed');
+//         // err.status = 401;
+//         // err.title = 'Login failed';
+//         // err.errors = ['The provided credentials were invalid.'];
+//         // return next(err);
+//         res.status(401)
+//         res.json({
+//           message: "Invalid credentials",
+//           statusCode: 401
+//         })
+//       }
 
-      return res.json({
-        user
-      });
-    }
-  );
+//       await setTokenCookie(res, user);
+
+//       return res.json({
+//         user
+//       });
+//     }
+//   );
 
 
 // Log out
@@ -46,12 +67,18 @@ router.delete(
 // Restore session user
 router.get(
   '/',
-  restoreUser,
+  requireAuth, restoreUser,
   (req, res) => {
     const { user } = req;
     if (user) {
       return res.json({
-        user: user.toSafeObject()
+        // user: user.toSafeObject()
+        "id": user.id,
+        "firstName": user.firstName,
+        "lastName": user.lastName,
+        "email": user.email,
+        "username": user.username
+
       });
     } else return res.json({});
   }
@@ -61,10 +88,10 @@ const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage('Please provide a valid email or username.'),
+    .withMessage('Email or username is required'),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a password.'),
+    .withMessage('Password is required'),
   handleValidationErrors
 ];
 
@@ -75,15 +102,24 @@ router.post(
   validateLogin,
   async (req, res, next) => {
     const { credential, password } = req.body;
+    // if(!credential) {
+    //   const err = new ValidationError('Email or username is required')
+    //   res.json(err)
+    // }
 
     const user = await User.login({ credential, password });
 
     if (!user) {
-      const err = new Error('Login failed');
-      err.status = 401;
-      err.title = 'Login failed';
-      err.errors = ['The provided credentials were invalid.'];
-      return next(err);
+      // const err = new Error('Login failed');
+      // err.status = 401;
+      // err.title = 'Login failed';
+      // err.errors = ['The provided credentials were invalid.'];
+      // return next(err);
+      res.status(401)
+      res.json({
+        message: "Invalid credentials",
+        statusCode: 401
+      })
     }
 
     await setTokenCookie(res, user);
