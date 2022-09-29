@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         models.Review,
         {
           foreignKey:'userId',
+          // as: 'Owner',
           onDelete: 'CASCADE',
           hooks: true
         }
@@ -42,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         models.Spot,
         {
           foreignKey: 'ownerId',
+          as: 'Owner',
           onDelete: 'cascade',
           hooks: true,
           as: 'Owner'

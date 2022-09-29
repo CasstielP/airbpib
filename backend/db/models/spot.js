@@ -32,13 +32,16 @@ module.exports = (sequelize, DataTypes) => {
       //one-to-many(user-spot)
       Spot.belongsTo(
         models.User,
-        {foreignKey: 'ownerId'}
+        {foreignKey: 'ownerId',
+        as:'Owner'
+      }
       )
       //one-to-many(spot-spotImage)
       Spot.hasMany(
         models.SpotImage,
         {
           foreignKey: 'spotId',
+          // as: 'Owner',
           onDelete: 'CASCADE',
           hooks: true
         }

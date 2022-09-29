@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       )
       //many-to-many(user-review-spot)
       Review.belongsTo(models.User, {foreignKey: 'userId'})
-      // Review.belongsTo(models.Spot, {foreignKey: 'spotId'})
+      Review.belongsTo(models.Spot, {foreignKey: 'spotId'})
       //one-to-many(review-reviewImage)
       Review.hasMany(
         models.ReviewImage,
@@ -32,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         models.Spot,
         {
           foreignKey: 'spotId',
-          onDelete: 'CASCADE',
-          hooks: true
+          // onDelete: 'CASCADE',
+          // hooks: true
         }
       )
     }

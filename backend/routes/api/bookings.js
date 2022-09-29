@@ -27,24 +27,27 @@ router.get('/current', requireAuth, async (req, res)=> {
         },
         include: {model: Spot}
     })
-    res.json(bookings)
+    res.json({
+        Bookings: bookings
+    })
 })
 
 
 const validateDates = [
     check('endDate')
-        .custom((endate, {req})=> {
-            if(new Date(endate) < new Date(startDate)){
-               return false
-            }
-        })
+        .custom((endate, {req})=> new Date(req.body.endDate) > new Date(req.body.startDate))
         .withMessage('endDate cannot be on or before startDate'),
         handleValidationErrors
 ]
-router.put('/:bookingId', requireAuth,  async (req, res)=> {
+router.put('/:bookingId', requireAuth, validateDates, async (req, res)=> {
     let userId = req.user.id
     const {startDate, endDate} = req.body
     const booking = await Booking.findByPk(req.params.bookingId)
+    // const spot = await Spot.findOne({
+    //     where: {
+    //         id: booking.spotId
+    //     }
+    // })
     if(!booking){
         res.status(404)
         res.json({
@@ -61,13 +64,62 @@ router.put('/:bookingId', requireAuth,  async (req, res)=> {
         })
     }
 
-    if(new Date(endDate) > booking.endDate) {
+    if(new Date() > booking.endDate) {
         res.status(403)
         res.json({
             "message": "Past bookings can't be modified",
             "statusCode": res.statusCode
         })
     }
+
+
+    const allspotBookings = await Booking.findAll({
+        where: {
+            spotId: booking.spotId
+        }
+    })
+
+
+    for(let i=0; i < allspotBookings.length; i++) {
+        let bookingStartDate = allspotBookings[i].dataValues.startDate
+        let bookingEndDate = allspotBookings[i].dataValues.endDate
+        if((new Date(req.body.startDate) <=  bookingEndDate) &&
+           (new Date(req.body.startDate) >= bookingStartDate)) {
+            res.status(403)
+            res.json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "statusCode": 403,
+                "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+                }
+            })
+
+        }
+        if (new Date(req.body.endDate) <= bookingEndDate &&
+                 new Date(req.body.endDate) >=  bookingStartDate) {
+                    res.status(403)
+                    res.json({
+                        "message": "Sorry, this spot is already booked for the specified dates",
+                        "statusCode": 403,
+                        "errors": {
+                          "endDate": "End date conflicts with an existing booking",
+                        }
+                    })
+                 }
+        if(new Date(req.body.startDate) < bookingStartDate &&
+           new Date(req.body.endDate) > bookingEndDate) {
+            res.status(403)
+                    res.json({
+                        "message": "Sorry, this spot is already booked for the specified dates",
+                        "statusCode": 403,
+                        "errors": {
+                          "endDate": "End date conflicts with an existing booking",
+                        }
+                    })
+           }
+
+    }
+
 
     await booking.update({
         startDate,
@@ -84,11 +136,6 @@ router.put('/:bookingId', requireAuth,  async (req, res)=> {
 router.delete('/:bookingId', requireAuth, async (req, res)=> {
     let userId = req.user.id
     const booking = await Booking.findByPk(req.params.bookingId)
-    const spot = await Spot.findOne({
-        where:{
-            id: booking.spotId
-        }
-    })
     if(!booking) {
         res.status(404)
         res.json({
@@ -96,6 +143,11 @@ router.delete('/:bookingId', requireAuth, async (req, res)=> {
             "statusCode": res.statusCode
         })
     }
+    const spot = await Spot.findOne({
+        where:{
+            id: booking.spotId
+        }
+    })
     if(userId !== booking.userId || userId !== spot.ownerId) {
         res.status(401)
         res.json({

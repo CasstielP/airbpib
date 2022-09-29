@@ -13,39 +13,75 @@ const router = express.Router();
 
 const validateQueries = [
     check('page')
-        .custom(value=>{
-            if(value < 0) throw new Error('Page must be greater than or equal to 1')
-        }),
+        .custom(val=>{
+            if(!val) return true
+            val = parseInt(val)
+            if(!val) return false
+            if(val >= 1) return true
+        })
+        .withMessage('Invalid page number'),
     check('size')
-        .custom(value=>{
-        if(value < 0) throw new Error('Page must be greater than or equal to 1')
-    }),
+        .custom(val=>{
+            if(!val) return true
+            val = parseInt(val)
+            if(!val) return false
+        if(val>=1) return true
+    })
+    .withMessage('Invalid size number'),
     check('maxLat')
-        .exists({checkFalsy: true})
+        .custom((val)=> {
+            if(!val) return true
+            val= parseFloat(val)
+            if(!val) return false
+            return true
+        })
         .withMessage('Maximum latitude is invalid'),
     check('minLat')
-        .exists({checkFalsy: true})
+        .custom((val)=> {
+            if(!val) return true
+            val = parseFloat(val)
+            if(!val) return false
+            return true
+
+        })
         .withMessage('Minimum latitude is invalid'),
     check('minLng')
-        .exists({checkFalsy: true})
+        .custom((val)=> {
+        if(!val) return true
+        val = parseFloat(val)
+        if(!val) return false
+        return true
+
+    })
         .withMessage('Maximum longitude is invalid'),
     check('maxLng')
-        .exists({checkFalsy: true})
+    .custom((val)=> {
+        if(!val) return true
+        val = parseFloat(val)
+        if(!val) return false
+        return true
+
+    })
         .withMessage('Minimum longitude is invalid'),
     check('minPrice')
-        .custom(value=> {
-            if(value < 0) throw new Error('Minimum price must be greater than or equal to 0')
-        }),
+        .custom(val=> {
+            if(!val) return true
+            val = parseFloat(val)
+            if(!val) return false
+            if(val >= 0) return true}),
         check('maxPrice')
-        .custom(value=> {
-            if(value < 0) throw new Error('Maximum price must be greater than or equal to 0')
-        }),
+        .custom(val=> {
+            if(!val) return true
+            val = parseFloat(val)
+            if(!val) return false
+            if(val >=0) return true}),
         handleValidationErrors
 ]
 
 
-router.get('/',  async (req, res)=> {
+router.get('/', validateQueries, async (req, res)=> {
     let {page, size, minLat, maxLat, minLng, maxLng, minPrice, MaxPrice} = req.query
+
     page = parseInt(page)
     size = parseInt(size)
     if(!page) page = 1
@@ -58,10 +94,6 @@ router.get('/',  async (req, res)=> {
 
 
    const spots = await Spot.findAll({
-       include: {
-           model: Review,
-           attributes:[]
-        },
         ...pagination
    })
 
@@ -78,13 +110,21 @@ router.get('/',  async (req, res)=> {
         }
     })
     spot.dataValues.avgRating=count/total;
-    spot.dataValues.previewImage= await SpotImage.findOne({
+     let img = await SpotImage.findOne({
         where:{
             spotId: spot.id,
             preview: true
         },
         attributes:['url']
     })
+    if(!img) {
+       spot.dataValues.previewImage = 'No preview'
+    } else{
+        spot.dataValues.previewImage = img.url
+    }
+
+    // console.log(spot.dataValues.previewImage)
+
    }
 
 
@@ -94,6 +134,7 @@ router.get('/',  async (req, res)=> {
         size
     })
 })
+
 
 
 const validateNewSpot = [
@@ -174,7 +215,10 @@ router.post('/:spotId/images', requireAuth, async (req, res)=> {
         preview
     })
 
-    return res.json(newSpotImg)
+    return res.json({
+        id: newSpotImg.id,
+        url
+    })
 
 })
 
@@ -203,13 +247,13 @@ router.get('/current', requireAuth, async (req, res)=> {
             }
         })
         spot.dataValues.avgRating=count/total;
-        spot.dataValues.previewImage= await SpotImage.findOne({
+        spot.dataValues.previewImage= (await SpotImage.findOne({
             where:{
                 spotId: spot.id,
                 preview: true
             },
             attributes:['url']
-        })
+        })).url
        }
 
     return res.json(userSpots)
@@ -226,7 +270,7 @@ router.get('/:spotId', async (req, res)=> {
             },
             {
             model: User,
-            // as: 'Owner',
+            as: 'Owner',
             attributes: ['id','firstName', 'lastName']
             }
         ]
@@ -435,22 +479,44 @@ router.get('/:spotId/reviews', async (req, res)=> {
         ]
     })
 
-    res.json(reviews)
+    res.json({
+        Reviews: reviews
+    })
 
 })
 
 const validateDates = [
     check('endDate')
-        .custom((endate, {req})=> {
-            if(new Date(endate) < new Date(startDate)){
-               return false
-            }
-        })
+        .custom((endate, {req})=> new Date(req.body.endDate) > new Date(req.body.startDate))
         .withMessage('endDate cannot be on or before startDate'),
         handleValidationErrors
 ]
 
-router.post('/:spotId/bookings', requireAuth, async (req, res)=> {
+
+// const ValidateBooking = [
+
+//     check('startDate')
+//         .custom(async(val, {req})=> {
+//          let spotBookings = await Booking.findAll({
+//      where: {
+//          spotId: req.params.spotId
+//      }
+//     })
+//     for (let i=0; i< spotBookings.length; i++) {
+//        let singBooking = spotBookings[i]
+//        if((new Date(req.body.startDate) >= singBooking.startDate) &&
+//           (new Date(req.body.startDate) <= singBooking.endDate))
+//           {
+//             return false
+//           };
+//     }
+//         })
+//         .withMessage('Start date conflicts with an existing booking')
+
+// ]
+
+
+router.post('/:spotId/bookings', validateDates, requireAuth, async (req, res)=> {
     const {startDate, endDate} = req.body
     let userId = req.user.id
     const spot = await Spot.findByPk(req.params.spotId)
@@ -475,23 +541,46 @@ router.post('/:spotId/bookings', requireAuth, async (req, res)=> {
         }
     })
 
-    // console.log(new Date(startDate))
 
-    // for(let i=0; i<allspotBookings.length; i++) {
-    //     let bookingStartDate = allspotBookings[i].dataValues.startDate
-    //     // console.log(bookingStartDate)
-    //     if(new Date(startDate) === bookingStartDate) {
-    //         res.status(403)
-    //         return res.json({
-    //             "message": "Sorry, this spot is already booked for the specified dates",
-    //             "statusCode": 403,
-    //             "errors": {
-    //               "startDate": "Start date conflicts with an existing booking",
-    //               "endDate": "End date conflicts with an existing booking"
-    //             }
-    //         })
-    //     }
-    // }
+    for(let i=0; i < allspotBookings.length; i++) {
+        let bookingStartDate = allspotBookings[i].dataValues.startDate
+        let bookingEndDate = allspotBookings[i].dataValues.endDate
+        if((new Date(req.body.startDate) <=  bookingEndDate) &&
+           (new Date(req.body.startDate) >= bookingStartDate)) {
+            res.status(403)
+            res.json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "statusCode": 403,
+                "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+                }
+            })
+
+        }
+        if (new Date(req.body.endDate) <= bookingEndDate &&
+                 new Date(req.body.endDate) >=  bookingStartDate) {
+                    res.status(403)
+                    res.json({
+                        "message": "Sorry, this spot is already booked for the specified dates",
+                        "statusCode": 403,
+                        "errors": {
+                          "endDate": "End date conflicts with an existing booking",
+                        }
+                    })
+                 }
+        if(new Date(req.body.startDate) < bookingStartDate &&
+           new Date(req.body.endDate) > bookingEndDate) {
+            res.status(403)
+                    res.json({
+                        "message": "Sorry, this spot is already booked for the specified dates",
+                        "statusCode": 403,
+                        "errors": {
+                          "endDate": "End date conflicts with an existing booking",
+                        }
+                    })
+           }
+
+    }
 
 
 
@@ -543,7 +632,9 @@ if(!spot) {
         }
 
     })
-    res.json(bookings)
+    res.json({
+       Bookings: bookings
+    })
  }
 
 })
