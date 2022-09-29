@@ -10,12 +10,59 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-router.get('/', async (req, res)=> {
-   const spots = await Spot.findAll({
-    include: {
-        model: Review,
-        attributes:[]
+
+const validateQueries = [
+    check('page')
+        .custom(value=>{
+            if(value < 0) throw new Error('Page must be greater than or equal to 1')
+        }),
+    check('size')
+        .custom(value=>{
+        if(value < 0) throw new Error('Page must be greater than or equal to 1')
+    }),
+    check('maxLat')
+        .exists({checkFalsy: true})
+        .withMessage('Maximum latitude is invalid'),
+    check('minLat')
+        .exists({checkFalsy: true})
+        .withMessage('Minimum latitude is invalid'),
+    check('minLng')
+        .exists({checkFalsy: true})
+        .withMessage('Maximum longitude is invalid'),
+    check('maxLng')
+        .exists({checkFalsy: true})
+        .withMessage('Minimum longitude is invalid'),
+    check('minPrice')
+        .custom(value=> {
+            if(value < 0) throw new Error('Minimum price must be greater than or equal to 0')
+        }),
+        check('maxPrice')
+        .custom(value=> {
+            if(value < 0) throw new Error('Maximum price must be greater than or equal to 0')
+        }),
+        handleValidationErrors
+]
+
+
+router.get('/',  async (req, res)=> {
+    let {page, size, minLat, maxLat, minLng, maxLng, minPrice, MaxPrice} = req.query
+    page = parseInt(page)
+    size = parseInt(size)
+    if(!page) page = 1
+    if(!size) size = 20
+    const pagination = {}
+    if(page>=1 && size>=1) {
+        pagination.offset = size * (page -1)
+        pagination.limit = size
     }
+
+
+   const spots = await Spot.findAll({
+       include: {
+           model: Review,
+           attributes:[]
+        },
+        ...pagination
    })
 
    for(let i=0; i<spots.length; i++) {
@@ -41,7 +88,11 @@ router.get('/', async (req, res)=> {
    }
 
 
-    res.json(spots)
+    res.json({
+        spots,
+        page,
+        size
+    })
 })
 
 
