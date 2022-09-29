@@ -2,7 +2,7 @@ const express = require('express')
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 // const { User } = require('../../db/models');
-const {Review, SpotImage, User, ReviewImage, sequelize} = require('../../db/models')
+const {Review, SpotImage, User, ReviewImage, Booking, sequelize} = require('../../db/models')
 const {Spot} = require('../../db/models')
 
 const { check } = require('express-validator');
@@ -304,7 +304,21 @@ router.delete('/:spotId', requireAuth, async (req, res)=> {
 })
 
 
-router.post('/:spotId/reviews', requireAuth, async (req, res)=> {
+const validateNewReview = [
+    check('review')
+        .exists({checkFalsy: true})
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({checkFalsy: true})
+        .isInt()
+        .custom((value) => {
+            if(value >=1 && value <=5){return true}
+            else false
+        })
+        .withMessage('Stars must be integer from 1 to 5'),
+        handleValidationErrors
+]
+router.post('/:spotId/reviews', validateNewReview, requireAuth, async (req, res)=> {
     const {review, stars} = req.body
     let userId = req.user.id
     const spot = await Spot.findByPk(req.params.spotId)
@@ -332,20 +346,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res)=> {
         }
     }
 
-    const validateNewReview = [
-        check('review')
-            .exists({checkFalsy: true})
-            .withMessage('Review text is required'),
-        check('stars')
-            .exists({checkFalsy: true})
-            .isInt()
-            .custom((value) => {
-                if(value >=1 && value <=5){return true}
-                else false
-            })
-            .withMessage('Stars must be integer from 1 to 5'),
-            handleValidationErrors
-    ]
 
     const newReview = await Review.create({
         spotId: req.params.spotId,
@@ -385,6 +385,115 @@ router.get('/:spotId/reviews', async (req, res)=> {
     })
 
     res.json(reviews)
+
+})
+
+const validateDates = [
+    check('endDate')
+        .custom((endate, {req})=> {
+            if(new Date(endate) < new Date(startDate)){
+               return false
+            }
+        })
+        .withMessage('endDate cannot be on or before startDate'),
+        handleValidationErrors
+]
+
+router.post('/:spotId/bookings', requireAuth, async (req, res)=> {
+    const {startDate, endDate} = req.body
+    let userId = req.user.id
+    const spot = await Spot.findByPk(req.params.spotId)
+    if(!spot){
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": res.statusCode
+        })
+    }
+    if(userId === spot.userId) {
+        res.status(400)
+        res.json({
+            message: 'Spot must not belong to the current user!',
+            statusCode: res.statusCode
+        })
+    }
+
+    const allspotBookings = await Booking.findAll({
+        where: {
+            spotId: req.params.spotId
+        }
+    })
+
+    // console.log(new Date(startDate))
+
+    // for(let i=0; i<allspotBookings.length; i++) {
+    //     let bookingStartDate = allspotBookings[i].dataValues.startDate
+    //     // console.log(bookingStartDate)
+    //     if(new Date(startDate) === bookingStartDate) {
+    //         res.status(403)
+    //         return res.json({
+    //             "message": "Sorry, this spot is already booked for the specified dates",
+    //             "statusCode": 403,
+    //             "errors": {
+    //               "startDate": "Start date conflicts with an existing booking",
+    //               "endDate": "End date conflicts with an existing booking"
+    //             }
+    //         })
+    //     }
+    // }
+
+
+
+    const newBooking = await Booking.create({
+        spotId: req.params.spotId,
+        userId: userId,
+        startDate,
+        endDate
+    })
+
+    res.json(newBooking)
+
+
+})
+
+
+
+
+router.get('/:spotId/bookings', requireAuth, async (req, res)=> {
+ let userId = req.user.id
+ const spot = await Spot.findByPk(req.params.spotId)
+if(!spot) {
+    res.status(404)
+    res.json({
+        "message": "Spot couldn't be found",
+        "statusCode": res.statusCode
+    })
+}
+
+ if(userId !== spot.ownerId) {
+     const bookings = await Booking.findAll({
+         where: {
+             spotId: req.params.spotId
+         },
+         attributes:['spotId', 'startDate', 'endDate']
+     })
+
+     res.json(bookings)
+ }
+
+ if(userId === spot.ownerId) {
+    const bookings = await Booking.findAll({
+        where: {
+            spotId: req.params.spotId
+        },
+        include: {
+            model: User,
+            attributes:['id', 'firstName','lastName']
+        }
+
+    })
+    res.json(bookings)
+ }
 
 })
 
