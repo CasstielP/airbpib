@@ -157,18 +157,12 @@ router.delete('/:bookingId', requireAuth, async (req, res)=> {
             "statusCode": res.statusCode
         })
     }
-    if(userId !== booking.userId) {
+    if((userId !== booking.userId ) && (userId !== spot.ownerId)) {
         res.status(403)
        return res.json({
             message: 'Unauthorized for such action!',
             statusCode: res.statusCode
         })
-    } else if(userId !== spot.ownerId) {
-        res.status(403)
-        return res.json({
-             message: 'Unauthorized for such action!',
-             statusCode: res.statusCode
-         })
     }
 
 
