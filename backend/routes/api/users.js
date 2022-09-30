@@ -94,17 +94,11 @@ router.post(
 
 
 
-    const user = await User.signup({firstName, lastName, email, username, password });
+    const user = await User.scope('currentUser').signup({firstName, lastName, email, username, password });
 
-    await setTokenCookie(res, user);
 
-    return res.json({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      token: ""
-    });
+    user.dataValues.token = setTokenCookie(res, user);
+    return res.json(user);
   }
 );
 
