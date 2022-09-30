@@ -107,7 +107,7 @@ router.post(
     //   res.json(err)
     // }
 
-    const user = await User.login({ credential, password });
+    const user = await User.scope('currentUser').login({ credential, password });
 
     if (!user) {
       // const err = new Error('Login failed');
@@ -122,15 +122,9 @@ router.post(
       })
     }
 
-    await setTokenCookie(res, user);
-
-    return res.json({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      token: ""
-    });
+    // const tokenCookiee = setTokenCookie(res, user);
+    user.dataValues.token = setTokenCookie(res, user)
+    return res.json(user);
   }
 );
 
