@@ -27,7 +27,7 @@ router.delete('/:imageId', requireAuth, async (req, res)=> {
         }
     })
     if(userId !== review.userId) {
-        res.status(401)
+        res.status(403)
         res.json({
             message: 'Unauthorized for such action',
             statusCode: res.statusCode

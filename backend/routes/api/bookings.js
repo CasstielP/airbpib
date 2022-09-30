@@ -57,7 +57,7 @@ router.put('/:bookingId', requireAuth, validateDates, async (req, res)=> {
     }
 
     if(userId !== booking.userId) {
-        res.status(401)
+        res.status(403)
         res.json({
             message: 'Unauthorized for such action!',
             statusCode: res.statusCode
@@ -143,30 +143,37 @@ router.delete('/:bookingId', requireAuth, async (req, res)=> {
             "statusCode": res.statusCode
         })
     }
+
     const spot = await Spot.findOne({
         where:{
             id: booking.spotId
         }
     })
-    if(userId !== booking.userId || userId !== spot.ownerId) {
-        res.status(401)
-        res.json({
-            message: 'Unauthorized for such action!',
-            statusCode: res.statusCode
-        })
-    }
 
-    let currentDate = new Date()
-    if(currentDate > booking.startDate){
+    if(new Date() > booking.startDate){
         res.status(403)
-        res.json({
+      return res.json({
             "message": "Bookings that have been started can't be deleted",
             "statusCode": res.statusCode
         })
     }
+    if(userId !== booking.userId) {
+        res.status(403)
+       return res.json({
+            message: 'Unauthorized for such action!',
+            statusCode: res.statusCode
+        })
+    } else if(userId !== spot.ownerId) {
+        res.status(403)
+        return res.json({
+             message: 'Unauthorized for such action!',
+             statusCode: res.statusCode
+         })
+    }
 
 
-    await booking.destroy()
+
+    booking.destroy()
     res.json({
         "message": "Successfully deleted",
         "statusCode": res.statusCode

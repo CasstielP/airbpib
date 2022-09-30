@@ -93,12 +93,12 @@ router.get('/', validateQueries, async (req, res)=> {
     }
 
 
-   const spots = await Spot.findAll({
+   const Spots = await Spot.findAll({
         ...pagination
    })
 
-   for(let i=0; i<spots.length; i++) {
-    let spot = spots[i]
+   for(let i=0; i<Spots.length; i++) {
+    let spot = Spots[i]
     let count = await Review.sum('stars', {
         where: {
             spotId: spot.id
@@ -123,13 +123,13 @@ router.get('/', validateQueries, async (req, res)=> {
         spot.dataValues.previewImage = img.url
     }
 
-    // console.log(spot.dataValues.previewImage)
+
 
    }
 
 
     res.json({
-        spots,
+        Spots,
         page,
         size
     })
@@ -201,7 +201,7 @@ router.post('/:spotId/images', requireAuth, async (req, res)=> {
         })
     }
     if(userId !== spot.ownerId){
-        res.status(401) //unauthorized
+        res.status(403) //unauthorized
        return res.json('user doesnt have credential to add image')
     }
 
@@ -217,7 +217,8 @@ router.post('/:spotId/images', requireAuth, async (req, res)=> {
 
     return res.json({
         id: newSpotImg.id,
-        url
+        url,
+        preview
     })
 
 })
@@ -256,7 +257,9 @@ router.get('/current', requireAuth, async (req, res)=> {
         })).url
        }
 
-    return res.json(userSpots)
+    return res.json({
+        Spots: userSpots
+    })
 })
 
 
@@ -354,7 +357,7 @@ router.put('/:spotId', validateEditSpot, requireAuth, async (req, res)=> {
     }
     const userId = req.user.id
     if(userId !== spot.ownerId){
-        res.status(401)
+        res.status(403)
         return res.json({
             message: 'unauthorized for such action!',
             statusCode: res.statusCode
@@ -386,7 +389,7 @@ router.delete('/:spotId', requireAuth, async (req, res)=> {
     }
     const userId = req.user.id
     if(userId !== spot.ownerId){
-        res.status(401) //unauthorized
+        res.status(403) //unauthorized
        return res.json('unauthorized for such action!')
     }
 
@@ -493,27 +496,7 @@ const validateDates = [
 ]
 
 
-// const ValidateBooking = [
 
-//     check('startDate')
-//         .custom(async(val, {req})=> {
-//          let spotBookings = await Booking.findAll({
-//      where: {
-//          spotId: req.params.spotId
-//      }
-//     })
-//     for (let i=0; i< spotBookings.length; i++) {
-//        let singBooking = spotBookings[i]
-//        if((new Date(req.body.startDate) >= singBooking.startDate) &&
-//           (new Date(req.body.startDate) <= singBooking.endDate))
-//           {
-//             return false
-//           };
-//     }
-//         })
-//         .withMessage('Start date conflicts with an existing booking')
-
-// ]
 
 
 router.post('/:spotId/bookings', validateDates, requireAuth, async (req, res)=> {
@@ -618,7 +601,9 @@ if(!spot) {
          attributes:['spotId', 'startDate', 'endDate']
      })
 
-     res.json(bookings)
+     res.json({
+        Bookings: bookings
+     })
  }
 
  if(userId === spot.ownerId) {

@@ -115,7 +115,7 @@ router.post(
       // err.title = 'Login failed';
       // err.errors = ['The provided credentials were invalid.'];
       // return next(err);
-      res.status(401)
+      res.status(403)
       res.json({
         message: "Invalid credentials",
         statusCode: 401
@@ -125,7 +125,11 @@ router.post(
     await setTokenCookie(res, user);
 
     return res.json({
-      user
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      token: ""
     });
   }
 );
