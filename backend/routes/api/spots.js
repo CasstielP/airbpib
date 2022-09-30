@@ -536,6 +536,7 @@ router.post('/:spotId/bookings', validateDates, requireAuth, async (req, res)=> 
                 "statusCode": 403,
                 "errors": {
                   "startDate": "Start date conflicts with an existing booking",
+                  "endDate": "End date conflicts with an existing booking"
                 }
             })
 
@@ -547,6 +548,7 @@ router.post('/:spotId/bookings', validateDates, requireAuth, async (req, res)=> 
                         "message": "Sorry, this spot is already booked for the specified dates",
                         "statusCode": 403,
                         "errors": {
+                          "startDate": "Start date conflicts with an existing booking",
                           "endDate": "End date conflicts with an existing booking",
                         }
                     })
