@@ -528,29 +528,44 @@ router.post('/:spotId/bookings', validateDates, requireAuth, async (req, res)=> 
     for(let i=0; i < allspotBookings.length; i++) {
         let bookingStartDate = allspotBookings[i].dataValues.startDate
         let bookingEndDate = allspotBookings[i].dataValues.endDate
-        if((new Date(req.body.startDate) <=  bookingEndDate) &&
-           (new Date(req.body.startDate) >= bookingStartDate)) {
-            res.status(403)
-            res.json({
-                "message": "Sorry, this spot is already booked for the specified dates",
-                "statusCode": 403,
-                "errors": {
-                  "startDate": "Start date conflicts with an existing booking",
-                }
-            })
 
+if(bookingStartDate <= new Date(req.body.startDate) &&
+new Date(req.body.startDate) <= bookingEndDate &&
+bookingStartDate <=new Date(req.body.endDate) &&
+new Date(req.body.endDate)<= bookingEndDate) {
+    res.status(403)
+    res.json({
+        "message": "Sorry, this spot is already booked for the specified dates",
+        "statusCode": 403,
+        "errors": {
+          "startDate": "Start date conflicts with an existing booking",
+          "endDate": "End date conflicts with an existing booking",
         }
-        if (new Date(req.body.endDate) <= bookingEndDate &&
-                 new Date(req.body.endDate) >=  bookingStartDate) {
-                    res.status(403)
-                    res.json({
-                        "message": "Sorry, this spot is already booked for the specified dates",
-                        "statusCode": 403,
-                        "errors": {
-                          "endDate": "End date conflicts with an existing booking",
-                        }
-                    })
-                 }
+    })
+
+  if(new Date(req.body.startDate) >= bookingStartDate && new Date(req.body.startDate) <= bookingEndDate) {
+    res.status(403)
+    res.json({
+        "message": "Sorry, this spot is already booked for the specified dates",
+        "statusCode": 403,
+        "errors": {
+            "startDate": "Start date conflicts with an existing booking",
+        }
+    })
+}
+
+}
+if( new Date(req.body.endDate) >= bookingStartDate &&  new Date(req.body.endDate) <= bookingEndDate) {
+    res.status(403)
+    res.json({
+        "message": "Sorry, this spot is already booked for the specified dates",
+        "statusCode": 403,
+        "errors": {
+          "endDate": "End date conflicts with an existing booking",
+        }
+    })
+}
+
         if(new Date(req.body.startDate) < bookingStartDate &&
            new Date(req.body.endDate) > bookingEndDate) {
             res.status(403)
