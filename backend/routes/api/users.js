@@ -57,9 +57,6 @@ router.post(
   async (req, res) => {
     const { firstName, lastName, email, username, password} = req.body;
 
-
-
-
     const existEmail = await User.findOne({
       where:{
         email: email
@@ -91,11 +88,7 @@ router.post(
       })
     }
 
-
-
-
     const user = await User.scope('currentUser').signup({firstName, lastName, email, username, password });
-
 
     user.dataValues.token = setTokenCookie(res, user);
     return res.json(user);
