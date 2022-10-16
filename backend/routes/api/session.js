@@ -67,22 +67,38 @@ router.delete(
 // Restore session user
 router.get(
   '/',
-  requireAuth, restoreUser,
+   restoreUser,
   (req, res) => {
     const { user } = req;
     if (user) {
-      return res.json({
-        // user: user.toSafeObject()
-        "id": user.id,
-        "firstName": user.firstName,
-        "lastName": user.lastName,
-        "email": user.email,
-        "username": user.username
-
-      });
-    } else return res.json({});
+      return res.json(
+       user.toSafeObject()
+      );
+    } else {
+      return res.json(null);
+    }
   }
 );
+
+
+// router.get(
+//   '/',
+//   requireAuth, restoreUser,
+//   (req, res) => {
+//     const { user } = req;
+//     if (user) {
+//       return res.json({
+//         // user: user.toSafeObject()
+//         "id": user.id,
+//         "firstName": user.firstName,
+//         "lastName": user.lastName,
+//         "email": user.email,
+//         "username": user.username
+
+//       });
+//     } else return res.json({});
+//   }
+// );
 
 const validateLogin = [
   check('credential')
