@@ -20,7 +20,6 @@ function Navigation({ isLoaded }){
       <>
         <LoginFormModal />
         <SignupFormModal />
-
       </>
     );
   }
