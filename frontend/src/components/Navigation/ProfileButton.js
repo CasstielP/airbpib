@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import * as spotActions from '../../store/spot'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -27,6 +28,11 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
   };
+
+  const createSpot = (e) => {
+    e.preventDefault();
+    dispatch(spotActions.createSpot())
+  }
 
   return (
     <>
