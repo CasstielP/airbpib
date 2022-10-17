@@ -14,22 +14,22 @@ module.exports = {
     await queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url: 'https://a0.muscache.com/im/pictures/52c83c5e-88b8-4d81-adda-81dd9907417f.jpg?im_w=1440',
+        url: 'https://cis3110fall2021pi.s3.us-west-1.amazonaws.com/aAMod5ProFiles/lakeArrowHead.png',
         preview: true
       },
       {
         spotId: 2,
-        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-593420125710132336/original/abe087f8-0a7d-4227-a0a5-6a36cc82d876.jpeg?im_w=1200',
+        url: 'https://cis3110fall2021pi.s3.us-west-1.amazonaws.com/aAMod5ProFiles/yuccavalley.png',
         preview: false
       },
       {
         spotId: 3,
-        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53740833/original/703094b3-07b3-4fe5-9da6-2f4bd4dd8747.jpeg?im_w=1200',
+        url: 'https://cis3110fall2021pi.s3.us-west-1.amazonaws.com/aAMod5ProFiles/bigBear.png',
         preview: false
       },
       {
         spotId: 4,
-        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-39876677/original/4b6ba8a5-09e4-4a6d-a99e-77edd6ad28ca.jpeg?im_w=1200',
+        url: 'https://cis3110fall2021pi.s3.us-west-1.amazonaws.com/aAMod5ProFiles/Rome.png',
         preview: false
       }
     ])

@@ -78,7 +78,7 @@ const validateQueries = [
         handleValidationErrors
 ]
 
-
+//----------------get all spots-----------------------
 router.get('/', validateQueries, async (req, res)=> {
     let {page, size, minLat, maxLat, minLng, maxLng, minPrice, MaxPrice} = req.query
 
@@ -169,6 +169,9 @@ const validateNewSpot = [
     handleValidationErrors
 ]
 
+
+
+//----------------create new spot ----------------------
 router.post('/', validateNewSpot, requireAuth, async (req, res)=> {
     const{address, city, state, country,lat,
         lng, name, description, price} = req.body
