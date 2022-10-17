@@ -131,14 +131,15 @@ router.post(
       // err.title = 'Login failed';
       // err.errors = ['The provided credentials were invalid.'];
       // return next(err);
-      res.status(403)
+      res.status(401)
       res.json({
         message: "Invalid credentials",
-        statusCode: 401
+        statusCode: res.statusCode
       })
     }
 
     // const tokenCookiee = setTokenCookie(res, user);
+    // console.log(user)
     user.dataValues.token = setTokenCookie(res, user)
     return res.json(user);
   }
