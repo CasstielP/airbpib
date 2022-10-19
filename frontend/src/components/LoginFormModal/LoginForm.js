@@ -23,6 +23,7 @@ function LoginForm() {
 
     <form onSubmit={handleSubmit}>
       <ul>
+        {console.log(errors)}
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}

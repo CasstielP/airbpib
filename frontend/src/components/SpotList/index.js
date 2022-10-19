@@ -15,17 +15,16 @@ const SpotList = ()=> {
 
     return (
         <div>
-            <h1>Spots</h1>
+            <h1 id='spotHead'>Spots</h1>
             <div id='SpotContainer'>
                 {Object.values(spots).map((spot)=> (
-                <div id='singSpot'>
+                <div id='singSpot' key={spot.id} >
+                     {/* <img src={`${spot.previewImage}`}/> */}
+                <p id='spotimg'>Image</p>
                 <h3 id='spotName'>{spot.name}</h3>
                 <p>{spot.city}, {spot.country}</p>
-                <p>{spot.price} per night</p>
-                <p> {spot.avgRating} </p>
-                    {/* <div>
-                    <img src={`${spot.previewImage}`}/>
-                    </div> */}
+                <p>{spot.price}$ per night</p>
+                <p> {spot.avgRating}</p>
                 </div>
             ))}
             </div>
