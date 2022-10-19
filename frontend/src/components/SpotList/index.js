@@ -18,7 +18,7 @@ const SpotList = ()=> {
             <h1 id='spotHead'>Spots</h1>
             <div id='SpotContainer'>
                 {Object.values(spots).map((spot)=> (
-                <div id='singSpot'>
+                <div id='singSpot' key={spot.id} >
                      {/* <img src={`${spot.previewImage}`}/> */}
                 <p id='spotimg'>Image</p>
                 <h3 id='spotName'>{spot.name}</h3>

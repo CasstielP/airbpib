@@ -34,7 +34,7 @@ const SpotDetail = () => {
             <h4>Reviews</h4>
             <div>
                 {reviews.map((review)=>(
-                    <div>
+                    <div key={review.id}>
                         <p>{review.User.firstName}</p><span>{review.stars} star</span>
                         <p>{review.review}</p>
                     </div>
