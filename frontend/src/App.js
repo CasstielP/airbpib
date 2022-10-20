@@ -7,6 +7,8 @@ import Navigation from "./components/Navigation";
 import SpotList from "./components/SpotList";
 import CreateSpotFormPage from "./components/CreateSpot";
 import SpotDetail from "./components/SingleSpotPage";
+import ProfilePage from "./components/Profile";
+import EditSpotPage from "./components/EditSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +33,12 @@ function App() {
           </Route>
           <Route exact path='/spots/:spotId'>
             <SpotDetail />
+          </Route>
+          <Route exact path='/user'>
+            <ProfilePage />
+          </Route>
+          <Route exact path='/spots/:spotId/edit'>
+            <EditSpotPage />
           </Route>
         </Switch>
       )}

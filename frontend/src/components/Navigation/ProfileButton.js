@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import * as spotActions from '../../store/spot'
-
+import {useHistory} from 'react-router-dom'
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-
+  const history = useHistory()
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -29,6 +29,9 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
+  const  profilePage = () => {
+    history.push('/user')
+  }
 
 
   return (
@@ -40,6 +43,9 @@ function ProfileButton({ user }) {
         <ul className="profile-dropdown">
           <li>{user.username}</li>
           <li>{user.email}</li>
+          <li>
+            <button onClick={profilePage}>Profile</button>
+          </li>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>

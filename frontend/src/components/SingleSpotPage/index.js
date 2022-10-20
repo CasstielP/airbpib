@@ -11,9 +11,14 @@ const SpotDetail = () => {
     const history = useHistory();
 
     const currentSpot = useSelector(state=>state.spot[spotId])
+    // console.log(currentSpot)
     const currentUser = useSelector(state=> state.session.user)
     // const reviews = useSelector(state=>Object.values(state.review))
     // const spotReviews = reviews.filter((review)=>review.userId === spotId)
+
+    const handleEdit = () => {
+        history.push('/spots/:spotId/edit')
+    }
 
     useEffect(()=> {
         dispatch(getSpotDetail(spotId))
@@ -30,6 +35,7 @@ const SpotDetail = () => {
         <div>
            <h3>{currentSpot.name}</h3>
            {/* <Link to={`/spots/${spotId}/editspot`}><button>Edit Spot</button></Link> */}
+           {<div>{currentUser && currentSpot.ownerId === currentUser.id ? <button  value={spotId} onClick={(e)=>handleEdit(e.target.value)}></button> : null}</div>}
             {/* <div> {currentUser && currentSpot.ownerId === currentUser.id ? <DeleteSpotForm /> : null} </div> */}
             <p>avgRating, reviews,</p><span>{currentSpot.city}, {currentSpot.country}</span>
             <p>spotImage</p>
