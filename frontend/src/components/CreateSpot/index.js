@@ -12,26 +12,26 @@ function CreateSpotFormPage() {
     const [country, setCountry] = useState('')
     const [lat, setLat] = useState('')
     const [lng, setLng] = useState('')
-    const [spotName, setspotName] = useState('')
+    const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
+    const [url , setUrl] = useState('')
     const [errors, setErrors] = useState([]);
     const history = useHistory()
 
 
 const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('testing')
     setErrors([]);
-     dispatch(spotActions.createSpot({
-        address, city, state, country, lat, lng, spotName, description, price
-    }))
-    // .catch(async (res) => {
-    //     const data = await res.json();
-    //     if (data && data.errors) setErrors(data.errors);
-    // });
-    // .then((console.log('version1'))
-    .then(history.push('/'))
+    const payload = {
+        address, city, state, country, lat, lng, name, description, price, url
+    }
+    const imageData = {url}
+     dispatch(spotActions.createSpot(payload, imageData))
+    .then(()=>{
+      alert('Spot Created Successfully!')
+      history.push('/')
+    })
 }
 
 
@@ -98,8 +98,8 @@ return (
       spot Name
         <input
           type="text"
-          value={spotName}
-          onChange={(e) => setspotName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
         />
       </label>
@@ -118,6 +118,15 @@ return (
           type="number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
+          required
+        />
+      </label>
+      <label>
+        Image URL:
+        <input
+          type="text"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
           required
         />
       </label>

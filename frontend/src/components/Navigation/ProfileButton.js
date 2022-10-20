@@ -29,10 +29,7 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
-  const createSpot = (e) => {
-    e.preventDefault();
-    dispatch(spotActions.createSpot())
-  }
+
 
   return (
     <>
