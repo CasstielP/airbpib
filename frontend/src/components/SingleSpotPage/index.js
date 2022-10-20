@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, useHistory, NavLink, Link } from "react-router-dom";
 import {getSpotDetail} from '../../store/spot'
 // import { deleteSpotThunk } from "../../store/spot";
-// import DeleteSpotForm from "../DeleteSpot";
+import DeleteSpotForm from "../DeleteSpot";
 // import {loadAllReviews} from '../../store/review'
 const SpotDetail = () => {
     const {spotId} = useParams();
@@ -35,8 +35,8 @@ const SpotDetail = () => {
         <div>
            <h3>{currentSpot.name}</h3>
            {/* <Link to={`/spots/${spotId}/editspot`}><button>Edit Spot</button></Link> */}
-           {<div>{currentUser && currentSpot.ownerId === currentUser.id ? <button  value={spotId} onClick={(e)=>handleEdit(e.target.value)}></button> : null}</div>}
-            {/* <div> {currentUser && currentSpot.ownerId === currentUser.id ? <DeleteSpotForm /> : null} </div> */}
+           {<div>{currentUser && currentSpot.ownerId === currentUser.id ? <button  value={spotId} onClick={(e)=>handleEdit(e.target.value)}>Edit Spot</button> : null}</div>}
+            <div> {currentUser && currentSpot.ownerId === currentUser.id ? <DeleteSpotForm /> : null} </div>
             <p>avgRating, reviews,</p><span>{currentSpot.city}, {currentSpot.country}</span>
             <p>spotImage</p>
             <p>{currentSpot.description}</p>

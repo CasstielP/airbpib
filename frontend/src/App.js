@@ -9,6 +9,7 @@ import CreateSpotFormPage from "./components/CreateSpot";
 import SpotDetail from "./components/SingleSpotPage";
 import ProfilePage from "./components/Profile";
 import EditSpotPage from "./components/EditSpot";
+import DeleteSpotForm from "./components/DeleteSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,9 @@ function App() {
           <Route exact path='/spots/:spotId/edit'>
             <EditSpotPage />
           </Route>
+          {/* <Route exact path= '/spots/:spotId/delete'>
+            <DeleteSpotForm />
+          </Route> */}
         </Switch>
       )}
 
