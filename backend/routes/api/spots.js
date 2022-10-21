@@ -408,7 +408,6 @@ const validateNewReview = [
         .withMessage('Review text is required'),
     check('stars')
         .exists({checkFalsy: true})
-        .isInt()
         .custom((value) => {
             if(value >=1 && value <=5){return true}
             else false
