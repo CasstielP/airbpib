@@ -1,11 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useContext, useEffect, useState } from "react";
 import { useParams, useHistory, NavLink, Link } from "react-router-dom";
-import {getSpotDetail} from '../../store/spot'
+import {getOneSpot} from '../../store/spot'
 import DeleteSpotForm from "../DeleteSpot";
 import {loadAllReviews, createReview} from '../../store/review'
 import ReviewPortion from "../Review";
-import CreateReview from "../CreateReview";
 import CreateReviewModal from '../CreateReview/reviewModal'
 const SpotDetail = () => {
     const {spotId} = useParams();
@@ -13,8 +12,8 @@ const SpotDetail = () => {
     const history = useHistory();
 
 
-    const currentSpot = useSelector(state=>state.spot[spotId])
-    // console.log(currentSpot)
+    const currentSpot = useSelector(state=>state.spot.singleSpot)
+
     const currentUser = useSelector(state=> state.session.user)
 
 
@@ -26,7 +25,7 @@ const SpotDetail = () => {
 
 
     useEffect(()=> {
-        dispatch(getSpotDetail(spotId))
+        dispatch(getOneSpot(spotId))
         // .then((res)=>setisLoaded(true))
     }, [dispatch, spotId])
 

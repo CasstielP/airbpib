@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as spotActions from "../../store/spot";
-import {getSpotDetail} from '../../store/spot'
+import {getOneSpot} from '../../store/spot'
 
 function EditSpotPage() {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ function EditSpotPage() {
 
 
   useEffect(() => {
-    dispatch(getSpotDetail(spotId));
+    dispatch(getOneSpot(spotId));
 }, [spotId, dispatch]);
 
 
