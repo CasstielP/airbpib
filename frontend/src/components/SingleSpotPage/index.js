@@ -6,6 +6,7 @@ import DeleteSpotForm from "../DeleteSpot";
 import {loadAllReviews, createReview} from '../../store/review'
 import ReviewPortion from "../Review";
 import CreateReview from "../CreateReview";
+import CreateReviewModal from '../CreateReview/reviewModal'
 const SpotDetail = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
@@ -43,8 +44,10 @@ const SpotDetail = () => {
             <h4>Reviews</h4>
             <ReviewPortion spotId={spotId}/>
             <h4>Leave a Review</h4>
-            <CreateReview spotId={spotId}/>
-
+            {/* <CreateReview spotId={spotId}/> */}
+            <div>
+                <CreateReviewModal spotId={spotId}/>
+            </div>
         </div>
         </>
     )

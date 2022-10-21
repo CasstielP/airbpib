@@ -40,43 +40,38 @@
 
 
 
-  <form>
-  <label>Experience
-      <br></br>
-      <textarea
-          className="experience-input-box"
-          type="text" value={review}
-          onChange={(e) => setReview(e.target.value)}
-          placeholder="Write a public review"
-          required />
-  </label>
-  <br></br>
-  <label className="select-star-text"> Overall rating
-      <div className="star-container">
-          {[...Array(5)].map((star, i) => {
-              const ratingValue = i + 1;
+  const handleSubmit = async (e) => {
+    console.log("COMPONENT HANDLESUBMIT STARTS")
+    e.preventDefault()
+    setErrors([])
+    setHasSubmitted(true)
 
-              return (
-                  <label>
-                      <input
-                          type="radio" name="stars"
-                          value={ratingValue}
-                          onClick={() => setStars(ratingValue)}
-                      />
-                      <FaStar
-                          className="star"
-                          color={ratingValue <= (hover || stars) ? "#ffc107" : "#e4e5e9"}
-                          size={36}
-                          onMouseEnter={() => setHover(ratingValue)}
-                          onMouseLeave={() => setHover(ratingValue)}
-                      />
-                  </label>
-              )
-          })}
-      </div>
-  </label>
-  <br></br>
-  <button
-      className="review-submit-button"
-      onClick={() => { alert('Please login or signup first') }}>Submit</button>
-</form>
+    const errorsArr = []
+
+    if (!review.length || review.length > 255) errorsArr.push("please enter a valid review fewer than 255 characters long")
+    if (url.length && (url.length > 255 || !url.includes(".jpg"||".jpeg"||".png"||".gif"))) errorsArr.push("please enter a valid image url fewer than 255 characters long")
+
+    setErrors(errorsArr)
+
+    if (errorsArr.length) return
+
+    const reviewInfo = { review, stars, url }
+
+    // console.log("COMPONENT HANDLESUBMIT, BEFORE DISPATCH THUNK, REVIEWINFO:", reviewInfo)
+
+    const newReview = await dispatch(thunkCreateNewReview(reviewInfo, spotId, currentUser))
+      .catch(async (res) => {
+        const message = await res.json()
+        const messageErrors = []
+        if (message) {
+          messageErrors.push(message.message)
+          setErrors(messageErrors)
+        }
+      })
+
+
+      reset()
+      history.push(`/spots/${spotId}`)
+
+    // console.log("COMPONENT HANDLESUBMIT ENDS")
+  }

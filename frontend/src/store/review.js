@@ -68,7 +68,7 @@ export const getUserReviews = ()=> async (dispatch) =>{
 
 
 //thunk add new review
-export const createReview = (payload, payload, currentUser) => async (dispatch) => {
+export const createReview = (payload, spotId, currentUser) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",
         headers: { "Content-Type": "application/json"},
@@ -77,10 +77,10 @@ export const createReview = (payload, payload, currentUser) => async (dispatch) 
     if(response.ok) {
         const newReview = await response.json()
         const userData = {}
-        userData.id = user.id
-        userData.firstName = user.firstName
-        userData.lastName = user.lastName
-        newReview.currentUser = userData
+        userData.id = currentUser.id
+        userData.firstName = currentUser.firstName
+        userData.lastName = currentUser.lastName
+        newReview.User = userData
         dispatch(addReviews(newReview))
         return newReview
     }
