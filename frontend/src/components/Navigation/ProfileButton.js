@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import * as spotActions from '../../store/spot'
 import {useHistory} from 'react-router-dom'
+
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -33,6 +34,10 @@ function ProfileButton({ user }) {
     history.push('/user')
   }
 
+  const UserSpotsPage = () => {
+    history.push('/spots/user')
+  }
+
 
   return (
     <>
@@ -45,6 +50,9 @@ function ProfileButton({ user }) {
           <li>{user.email}</li>
           <li>
             <button onClick={profilePage}>Profile</button>
+          </li>
+          <li>
+            <button onClick={UserSpotsPage}>My Spots</button>
           </li>
           <li>
             <button onClick={logout}>Log Out</button>

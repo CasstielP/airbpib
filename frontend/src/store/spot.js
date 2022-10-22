@@ -55,10 +55,11 @@ const deleteSpot = (spotId) => {
 }
 
 
-const addImage = (image) => {
+const addImage = (img, spotId) => {
    return {
        type: ADD_IMAGE,
-       image
+       img,
+       spotId
    }
 }
 
@@ -71,6 +72,7 @@ export const fetchSpots = () => async (dispatch) => {
     if(response.ok) {
         const spots = await response.json();
         dispatch(loadSpots(spots))
+        return spots;
     }
 };
 
@@ -81,6 +83,7 @@ export const fetchUserSpots = () => async (dispatch) => {
     if(response.ok) {
         const userSpots = await response.json()
         dispatch(loadUserSpots(userSpots))
+        return userSpots
     }
 }
 
@@ -93,6 +96,7 @@ export const getOneSpot = (spotId) => async(dispatch) => {
     if(response.ok) {
         const spot = await response.json()
         dispatch(loadSpotDetail(spot))
+        return spot
     }
 }
 
@@ -113,7 +117,7 @@ export const createSpot = (spot) => async (dispatch) => {
 
 
 //thunk add image to spot
-export const createSpotImage = (spotId, img)=> async (dispatch) => {
+export const createSpotImage = (img, spotId)=> async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/images`, {
         method: "POST",
         headers: {
@@ -123,8 +127,7 @@ export const createSpotImage = (spotId, img)=> async (dispatch) => {
     })
     if(response.ok) {
         const image = await response.json()
-        dispatch(addImage(image))
-        return image
+        dispatch(addImage(spotId, image))
     }
 }
 
@@ -170,21 +173,17 @@ const spotReducer = (state = initialState, action) => {
     let newSpots;
     switch(action.type) {
         case LOAD_SPOTS:
-        newSpots = {...state}
-        const newSpotsArr = {}
-        action.spots.Spots.forEach((spot) => newSpotsArr[spot.id] = spot)
-        newSpots.allSpots = newSpotsArr
-        newSpots.singleSpot = {}
-        return newSpots;
-
-
-        case LOAD_USERSPOTS:
-        newSpots = {...state}
-        const newUserSpotArr = {}
-        action.spots.Spots.forEach((spot) => newUserSpotArr[spot.id] = spot)
-        newSpots.allSpots = newUserSpotArr
-        newSpots.singleSpot = {}
+        newSpots = {...state, allSpots: {}, singleSpot: {}}
+        action.spots.Spots.forEach((spot) => (newSpots.allSpots[spot.id] = spot));
         return newSpots
+
+        // case LOAD_USERSPOTS:
+        // newSpots = {...state}
+        // const newUserSpotArr = {}
+        // action.spots.Spots.forEach((spot) => newUserSpotArr[spot.id] = spot)
+        // newSpots.allSpots = newUserSpotArr
+        // newSpots.singleSpot = {}
+        // return newSpots
 
 
         case LOAD_SPOTDETAIL:
@@ -193,31 +192,24 @@ const spotReducer = (state = initialState, action) => {
             return newSpots;
 
         case ADD_SPOT:
-            newSpots={...state}
-            newSpots.allSpots = {...state.allSpots, [action.spot.id]: action.spot}
+            newSpots = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
+            newSpots.singleSpot = action.spot
             return newSpots
 
         case EDIT_SPOT:
-            newSpots = {...state}
-            const editedSpot = {...newSpots.allSpots[action.spot.id], ...action.spot}
-            newSpots.singleSpot = {...state.singleSpot, ...editedSpot}
-            newSpots.allSpots = {...state.allSpots, [action.spot.id]: editedSpot}
+            newSpots = {...state, allSpots: {...state.allSpots}}
+            newSpots.allSpots[action.spot.id] = action.spot
             return newSpots
 
 
         case DELETE_SPOT:
-        newSpots = {...state}
-        newSpots.allSpots = {...state.allSpots}
-        newSpots.singleSpot = {...state.singleSpot}
+        newSpots = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
         delete newSpots.allSpots[action.spotId]
-        if(newSpots.singleSpot.id === action.spotId) newSpots.singleSpot = {}
         return newSpots
 
         case ADD_IMAGE:
-            newSpots = {...state}
-            newSpots.allSpots={...state.allSpots}
-            newSpots.singleSpot = {...state.singleSpot}
-            newSpots.singleSpot.spotImages = [action.image]
+            newSpots = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
+            newSpots.allSpots[action.spotId].previewImage = action.url
             return newSpots
 
         default:

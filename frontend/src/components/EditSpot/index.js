@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as spotActions from "../../store/spot";
@@ -6,35 +6,53 @@ import {getOneSpot} from '../../store/spot'
 
 function EditSpotPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
   const {spotId} = useParams();
-  const currentSpot = useSelector(state=>state.spot[spotId])
-
-  console.log(currentSpot)
-
+  // console.log(spotId)
+  const currentSpot = useSelector(state=>state.spot.singleSpot)
   const currentSpotOwner = useSelector((state)=> state.session.user)
-  const [address, setAddress] = useState(currentSpot.address);
-  const [city, setCity] = useState(currentSpot.city);
-  const [state, setState] = useState(currentSpot.state);
-  const [country, setCountry] = useState(currentSpot.country);
-  const [lat, setLat] = useState(currentSpot.lat);
-  const [lng, setLng] = useState(currentSpot.lng);
-  const [name, setName] = useState(currentSpot.name);
-  const [description, setDescription] = useState(currentSpot.description);
-  const [price, setPrice] = useState(currentSpot.price);
+  console.log(currentSpot)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [country, setCountry] = useState('');
+  const [lat, setLat] = useState('');
+  const [lng, setLng] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
   const [errors, setErrors] = useState([]);
   const history = useHistory();
 
-
   useEffect(() => {
-    dispatch(getOneSpot(spotId));
-}, [spotId, dispatch]);
-
+    setAddress(currentSpot.address)
+    setCity(currentSpot.city)
+    setState(currentSpot.state)
+    setCountry(currentSpot.country)
+    setLat(currentSpot.lat)
+    setLng(currentSpot.lng)
+    setName(currentSpot.name)
+    setDescription(currentSpot.description)
+    setPrice(currentSpot.price)
+}, [])
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
+    setIsSubmitted(true)
+    let Errors = []
+
+    if (!address.length) Errors.push("address must not be empty")
+    if (!city.length) Errors.push("city must not be empty")
+    if (!state.length) Errors.push("state must not be empty")
+    if (!country.length) Errors.push("country must not be empty")
+    if (!name.length ) Errors.push("please enter a valid name")
+    if (!description.length) Errors.push("please enter a valid description")
+    if (!price || price <=0) Errors.push("please enter a valid price")
+    setErrors(Errors)
+
+
     const editSpot = {
       address,
       city,
@@ -46,33 +64,31 @@ function EditSpotPage() {
       description,
       price,
     };
-      dispatch(spotActions.editSpotThunk(editSpot, spotId))
-      .then(() => {
-        history.push(`/spots/${currentSpot.id}`);
-        alert('Successfully Updated')
+
+    dispatch(spotActions.editSpotThunk(editSpot, spotId))
+    .then(()=>{
+        alert('Sccessully Edited Spot')
+        history.push('/user')
       })
-      .catch(() => {
-        alert("catch");
-      });
-  };
+  }
 
 
   return (
     <>
       <h3>Spot Name</h3>
       <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
+      <div>
+          {
+          isSubmitted &&
+          errors?.map((error)=>(<div key={error}>{error}</div>))
+          }
+        </div>
         <label>
           address
           <input
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -81,7 +97,6 @@ function EditSpotPage() {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -90,7 +105,6 @@ function EditSpotPage() {
             type="text"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -99,7 +113,6 @@ function EditSpotPage() {
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -108,7 +121,6 @@ function EditSpotPage() {
             type="number"
             value={lat}
             onChange={(e) => setLat(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -117,7 +129,6 @@ function EditSpotPage() {
             type="number"
             value={lng}
             onChange={(e) => setLng(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -126,7 +137,6 @@ function EditSpotPage() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -135,7 +145,6 @@ function EditSpotPage() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -144,7 +153,6 @@ function EditSpotPage() {
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            required
           />
         </label>
         <button type="submit">Submit</button>
@@ -152,5 +160,6 @@ function EditSpotPage() {
     </>
   );
 }
+
 
 export default EditSpotPage;

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { fetchSpots } from '../../store/spot';
-import SpotCard from '../SingleSpotPage/spotCard';
+import SpotCard from './spotCard';
 import './SpotList.css'
 
 const SpotList = ()=> {
