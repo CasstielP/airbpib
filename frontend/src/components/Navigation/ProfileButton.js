@@ -52,9 +52,6 @@ function ProfileButton({ user }) {
             <button onClick={profilePage}>Profile</button>
           </li>
           <li>
-            <button onClick={UserSpotsPage}>My Spots</button>
-          </li>
-          <li>
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>

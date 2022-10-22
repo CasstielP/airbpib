@@ -5,11 +5,34 @@
 }
 
 .allspots-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 140px 90px;
+    flex-flow: row wrap;
+}
+
+.preview-img{
+    width: 290px;
+    height: 265px;
+    border-radius: 24px;
+    object-fit: cover;
+}
+
+.spotCard-box{
+    cursor: pointer;
+    width: 350px;
+    height: 360px;
+    margin: 15px;
+}
+
+.spotcard-content{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-    grid-gap: 30px 20px;
-    flex-wrap: wrap;
+    height: 100px;
     width: 100%;
-    margin: 0px 40px 20px 40px;
+    grid-template-columns: 3fr 1.5fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.bold{
+    font-weight: bold;
 }
