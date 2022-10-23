@@ -20,24 +20,26 @@ function LoginForm() {
   };
 
   return (
-
+    <div calss='modalWrapper'>
     <form onSubmit={handleSubmit}>
-      <ul>
-        {console.log(errors)}
-        {errors.map((error, idx) => (
+      <div className="modal-header">Log in</div>
+      <div className="errorList">
+        {errors.length > 0 && errors.map((error, idx) => (
           <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
+        ))}</div>
+      <div className="inputField-wrapper">
+        <label className="inputField">
         Username or Email
         <input
           type="text"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
           required
+
         />
       </label>
-      <label>
+      <div className="form-break"></div>
+      <label className="inputField">
         Password
         <input
           type="password"
@@ -46,9 +48,10 @@ function LoginForm() {
           required
         />
       </label>
-      <button type="submit">Log In</button>
+      </div>
+      <button type="submit" className="form-submitButton">Log In</button>
     </form>
-
+</div>
 
   );
 }
