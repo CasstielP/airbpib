@@ -7,7 +7,9 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
+    "heroku-postbuild": "npm run build --prefix frontend",
     "install": "npm --prefix backend install backend",
+    "dev:frontend": "npm install --prefix frontend start",
     "dev:backend": "npm install --prefix backend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
