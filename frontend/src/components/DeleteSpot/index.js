@@ -7,7 +7,7 @@ const DeleteSpotForm = () => {
     const {spotId} = useParams()
     const history = useHistory()
     const dispatch = useDispatch()
-    const spot = useSelector(state=> state.spot.singleSpot)
+    const spot = useSelector(state=> state.spot[spotId])
 
     if(!spot) {
         alert('Spot not found!')
@@ -16,6 +16,7 @@ const DeleteSpotForm = () => {
     const handleDeleteSpot =()=> {
         const spotIdNum = Number(spotId)
         dispatch(deleteSpotThunk(spotIdNum))
+        alert('success!')
         history.push('/')
     }
 

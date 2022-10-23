@@ -1,49 +1,56 @@
-import React from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import React, {useState} from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
-import CreateSpotFormPage from '../CreateSpot';
+import logo from './logov2.png'
+import HomePageButton from './HomePageButton';
+import './Navigation.css'
 
-
-function Navigation({ isLoaded }){
+function Navigation(){
   const sessionUser = useSelector(state => state.session.user);
-  const spotButton = (e) => {
-
-  }
+  const [showLogin, setShowLogin] = useState(false)
+  const [showSignup, setShowSignup] = useState(false);
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <>
       <ProfileButton user={sessionUser} />
-      {/* <Route><CreateSpotFormPage /></Route> */}
-      {/* <button onClick={spotButton} >Create Spot</button> */}
-      <NavLink to='/newspot'>Create Spot</NavLink>
-      </>
     );
   } else {
     sessionLinks = (
-      <>
-        <LoginFormModal />
-        <SignupFormModal />
-      </>
+      <HomePageButton
+      setShowLogin={setShowLogin}
+      setShowSignup={setShowSignup}
+      />
     );
   }
 
   return (
-    <>
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <div>
 
-    </>
-  );
+    <LoginFormModal
+      showLogin={showLogin}
+      setShowLogin={setShowLogin}
+    />
+
+    <SignupFormModal
+      showSignup={showSignup}
+      setShowSignup={setShowSignup}
+    />
+
+    <NavLink exact to="/">
+      <img className="logo" src={logo} />
+    </NavLink>
+
+      <div className="sessionlink">
+        {sessionLinks}
+      </div>
+    <div className="headerLine"></div>
+  </div>
+  )
 }
 
 export default Navigation;

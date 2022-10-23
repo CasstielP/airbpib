@@ -1,32 +1,23 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchSpots } from "../../store/spot";
-
+import { useHistory } from 'react-router-dom';
+import UserReviews from '../Review/userReview';
+import UserSpots from '../UserSpots';
 const ProfilePage = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const currentUser = useSelector(state=> state.session.user)
-    const allSpots = useSelector(state=> Object.values(state.spot.allspots))
-    const UserSpots = allSpots.filter((spot)=> spot.ownerId === currentUser.id)
-
-    useEffect(()=> {
-        dispatch(fetchSpots())
-    }, [])
+    const {username} = currentUser
+    console.log(currentUser)
 
     return (
+
         <>
-        <h3>Profile Page</h3>
-        <div>
-            {UserSpots.map((spot)=>
-                    <div key={spot.id} >
-                        <h3 id='spotName'>{spot.name}</h3>
-                        <p>User Name</p>
-                        <p>Image</p>
-                        <p>{spot.city}, {spot.country}</p>
-                        <p>{spot.price}$ per night</p>
-                        <p> {spot.avgRating}</p>
-                    </div>
-                )}
-        </div>
+            <h2>Hi, {username}</h2>
+            <UserSpots />
+            <br></br>
+            <br></br>
+            <UserReviews />
         </>
     )
 

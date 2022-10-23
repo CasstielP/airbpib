@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
-
+import './SignupForm.css'
 
 function SignupForm() {
   const dispatch = useDispatch();
@@ -26,15 +26,18 @@ function SignupForm() {
           if (data && data.errors) setErrors(data.errors);
         });
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    return setErrors(['Password entered must be the same']);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
+       <div className="modal-header">Sign Up</div>
+          <div className="errorList">
+          {errors.length > 0 && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </div>
+
+        <div className="inputField-wrapper">
+        <label className="inputField">
         First Name
         <input
           type="text"
@@ -43,7 +46,8 @@ function SignupForm() {
           required
         />
       </label>
-      <label>
+      <div className="form-break"></div>
+      <label className="inputField">
         Last Name
         <input
           type="text"
@@ -52,7 +56,8 @@ function SignupForm() {
           required
         />
       </label>
-      <label>
+      <div className="form-break"></div>
+      <label className="inputField">
         Email
         <input
           type="text"
@@ -61,7 +66,8 @@ function SignupForm() {
           required
         />
       </label>
-      <label>
+      <div className="form-break"></div>
+      <label className="inputField">
         Username
         <input
           type="text"
@@ -70,7 +76,8 @@ function SignupForm() {
           required
         />
       </label>
-      <label>
+      <div className="form-break"></div>
+      <label className="inputField">
         Password
         <input
           type="password"
@@ -79,7 +86,8 @@ function SignupForm() {
           required
         />
       </label>
-      <label>
+      <div className="form-break"></div>
+      <label className="inputField">
         Confirm Password
         <input
           type="password"
@@ -88,7 +96,8 @@ function SignupForm() {
           required
         />
       </label>
-      <button type="submit">Sign Up</button>
+      </div>
+      <button className="form-submitButton" type="submit">Sign Up</button>
     </form>
   );
 }

@@ -1,0 +1,38 @@
+.singleSpot-Container {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 12vw;
+    margin-bottom: 80px;
+  }
+
+  .singleSpot-Header-name {
+    margin-top: 40px;
+    margin-bottom: 5px;
+  }
+
+  .singleSpot-Header-detail {
+    margin-top: -14px;
+    margin-bottom: 20px;
+  }
+
+  .singleSpot-Header-detail span {
+    font-size: 15px;
+    margin-right: 5px;
+    font-weight: 500;
+  }
+
+  .singleSpot-imgContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 450px;
+  }
+
+  .one-spot-other-images-container {
+    display: grid;
+    grid-template: 1fr 1fr/ 1fr 1fr;
+    gap: 6px;
+    height: 450px;
+  }
