@@ -16,7 +16,6 @@ const SpotDetail = () => {
     let isOwner = false
     const currentSpot = useSelector(state=>state.spot.singleSpot)
     const currentUser = useSelector(state=> state.session.user)
-    console.log(currentSpot)
     // console.log(currentSpot.Owner.firstName)
     if(currentUser?.id === currentSpot.ownerId) isOwner = true
 

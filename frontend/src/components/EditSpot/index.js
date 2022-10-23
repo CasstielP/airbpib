@@ -10,7 +10,7 @@ function EditSpotPage() {
   // console.log(spotId)
   const currentSpot = useSelector(state=>state.spot.singleSpot)
   const currentSpotOwner = useSelector((state)=> state.session.user)
-  console.log(currentSpot)
+
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');

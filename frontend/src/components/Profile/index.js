@@ -8,7 +8,7 @@ const ProfilePage = () => {
     const history = useHistory()
     const currentUser = useSelector(state=> state.session.user)
     const {username} = currentUser
-    console.log(currentUser)
+
 
     return (
 

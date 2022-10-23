@@ -15,7 +15,7 @@ const CreateReview = ({spotId}) => {
     // const spotId = currentSpot.id
     const [submitted, setSubmitted] = useState(false)
     const spotReivews = useSelector(state=>Object.values(state.review.spotReviews))
-    console.log(spotReivews)
+
 
 
 
