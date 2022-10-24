@@ -43,15 +43,12 @@ function App() {
           <Route exact path='/spots/:spotId/edit'>
             <EditSpotPage />
           </Route>
-          {/* <Route exact path= '/spots/:spotId/delete'>
-            <DeleteSpotForm />
-          </Route> */}
           <Route exact path='/reviews/:reviewId/edit'>
             <EditReview />
           </Route>
-          <Route exact path='/spots/user'>
+          {/* <Route exact path='/spots/user'>
             <UserSpots />
-          </Route>
+          </Route> */}
         </Switch>
       )}
 

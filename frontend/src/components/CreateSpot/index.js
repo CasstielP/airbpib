@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as spotActions from "../../store/spot";
-
+import './newSpot.css'
 function CreateSpotFormPage() {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user);
@@ -34,28 +34,27 @@ const handleSubmit = (e)  => {
     if (!name.length ) Errors.push("please enter a valid name")
     if (!description.length) Errors.push("please enter a valid description")
     if (!price || price <=0) Errors.push("please enter a valid price")
-    if (!image.length || !image.includes(".jpg"||".jpeg"||".png"||".gif")) Errors.push("please enter a valid image url")
+    // if (!image.length || !image.includes(".jpg"||".jpeg"||".png"||".gif")) Errors.push("please enter a valid image url")
     setErrors(Errors)
 
 
     const payload = {
         address, city, state, country, lat, lng, name, description, price
     }
-    const imageData = {preview: image, preview: true}
+
+    const imageData = {url: image, preview: true}
 
 
 
     dispatch(spotActions.createSpot(payload))
         .then((response)=> {
-        dispatch(spotActions.createSpotImage(imageData, response.id))
+          dispatch(spotActions.createSpotImage(imageData, response.id))
+          alert('Sccessully Created New Spot')
         })
         .then(()=>{
-            alert('Sccessully Created New Spot')
+
             history.push('/')
           })
-
-
-
 }
 
 const handleCancel = (e) => {
@@ -64,16 +63,16 @@ const handleCancel = (e) => {
 }
 
 return (
-  <div>
-   <div>
+  <div className="ns-container">
+   <div className="ns-header-container">
     <h2>Host your Spot!</h2>
-      <div>
+      <div className="errorList">
           {
           isSubmitted &&
           errors?.map((error)=>(<div key={error}>{error}</div>))
           }
         </div>
-        <div>
+        <div className="input-container inputField-wrapper">
             <form onSubmit={handleSubmit}>
               <label>
                 address
@@ -83,6 +82,7 @@ return (
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
                 city
                 <input
@@ -91,6 +91,7 @@ return (
                   onChange={(e) => setCity(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
                 state
                 <input
@@ -99,6 +100,7 @@ return (
                   onChange={(e) => setState(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
                 country
                 <input
@@ -107,6 +109,7 @@ return (
                   onChange={(e) => setCountry(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
                 latitude
                 <input
@@ -115,6 +118,7 @@ return (
                   onChange={(e) => setLat(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
                 longtitude
                 <input
@@ -123,6 +127,7 @@ return (
                   onChange={(e) => setLng(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
               spot Name
                 <input
@@ -131,6 +136,7 @@ return (
                   onChange={(e) => setName(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
                 description
                 <input
@@ -139,6 +145,7 @@ return (
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
                 price
                 <input
@@ -147,16 +154,19 @@ return (
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </label>
+              <div className="form-break"></div>
               <label>
                 Image URL:
                 <input
                   type="text"
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
+                  placeholder='add image here'
+                  required
                 />
               </label>
-              <button type="submit">Create</button>
-              <button onClick={handleCancel}>Cancel</button>
+              <button className="submit-button" type="submit">Create</button>
+              <button className="submit-button" onClick={handleCancel}>Cancel</button>
             </form>
     </div>
     </div>

@@ -14,6 +14,11 @@ function ProfileButton({ user }) {
   };
 
   useEffect(() => {
+
+  }, [user])
+
+
+  useEffect(() => {
     if (!showMenu) return;
 
     const closeMenu = () => {
@@ -41,22 +46,45 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <div className="wrapper">
+
+      <button onClick={openMenu} className="pfbutton">
+      <span className="material-symbols-outlined">menu</span>
+            <span>  </span>
+            <span className="material-symbols-outlined">manage_accounts</span>
       </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={profilePage}>Profile</button>
-          </li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
-    </>
+
+{
+  showMenu && (
+
+  <div className="pfdropdownMenulogin">
+
+    <div className="currentuser-wrapper">
+      <div className="currentuser">{user.username}</div>
+      <div className="currentuser">{user.email}</div>
+    </div>
+
+    <div className='middleline'></div>
+
+    <div className="menu-select">
+      <div onClick={()=>history.push('/newspot')}>Host your Spot</div>
+    </div>
+
+    <div className="menu-select">
+      <div onClick={()=>history.push('/user')}>Profile</div>
+    </div>
+
+    <div className="menu-select">
+      <div onClick={logout}>Log Out</div>
+    </div>
+
+
+  </div>
+
+)}
+
+</div>
+  </>
   );
 }
 

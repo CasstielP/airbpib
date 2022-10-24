@@ -8,9 +8,11 @@
 //     const {reviewId} = useParams()
 //     const currentReview = useSelector(state=> state.review.spotReviews[reviewId])
 
-//     const [review, setReview] = useState(currentReview.review)
-//     const [stars, setStars] = useState(currentReview.stars)
+    const [review, setReview] = useState(currentReview.review)
+    const [stars, setStars] = useState(currentReview.stars)
+    const handleReviewSubmit = ()=> {
 
+    }
 
 //     return (
 //         <form onSubmit={handleReviewSubmit} >

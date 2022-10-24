@@ -31,9 +31,9 @@ function HomePageButton ({setShowLogin, setShowSignup}) {
       <div className="wrapper">
 
         <button onClick={openMenu} className="pfbutton">
-            <span class="material-symbols-outlined">menu</span>
+            <span className="material-symbols-outlined">menu</span>
             <span>  </span>
-            <span class="material-symbols-outlined">account_circle</span>
+            <span className="material-symbols-outlined">account_circle</span>
         </button>
 
         {
