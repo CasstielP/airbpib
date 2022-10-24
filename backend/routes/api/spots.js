@@ -444,15 +444,14 @@ router.post('/:spotId/reviews', validateNewReview, requireAuth, async (req, res)
     for (let i=0; i<allReview.length; i++) {
         console.log('------------------------------6')
         let singRev = allReview[i]
-        if(userId === singRev.userId){
+        if(userId == singRev.userId){
             res.status(403)
-            res.json({
+            return res.json({
                 "message": "User already has a review for this spot",
                 "statusCode": res.statusCode
             })
         }
     }
-    console.log('------------------------------7')
 
 
     const newReview = await Review.create({

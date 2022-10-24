@@ -33,24 +33,19 @@ const CreateReview = ({ spotId, setShowModal }) => {
     const reviewData = { review, stars };
 
 
-    dispatch(createReview(id, reviewData))
-    .then(() => {
-      // window.location.reload(false);
-      alert("Thank you for your feedback");
-      dispatch(getOneSpot(id))
-      setShowModal(false);
-    })
-    .then(()=> {
-      dispatch(loadAllReviews(id))
-    })
-    // .catch(async (response) => {
-    //     const message = await response.json()
-    //     if (message) {
-    //       Errors.push(message.message)
-    //       setErrors(Errors)
-    //     }
+    const newReview = await dispatch(createReview(id, reviewData))
+    .catch(async (response) => {
+        const message = await response.json()
+        const reviewError = []
+        if (message) {
+          reviewError.push(message.message)
+          setErrors(reviewError)
+        }
+      })
+    if(newReview) setShowModal(false)
 
-    //   })
+
+
   };
 
   return (
