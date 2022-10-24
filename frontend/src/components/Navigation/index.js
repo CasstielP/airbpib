@@ -5,7 +5,7 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
-import logo from './logov2.png'
+import logo from './logov3.png'
 import HomePageButton from './HomePageButton';
 import './Navigation.css'
 

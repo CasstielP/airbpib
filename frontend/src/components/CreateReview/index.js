@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../store/review";
 import {getOneSpot} from '../../store/spot'
 import {loadAllReviews} from '../../store/review'
+import './reviewForm.css'
 const CreateReview = ({ spotId, setShowModal }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const CreateReview = ({ spotId, setShowModal }) => {
     <div>
       <div className="review-modal-subheader">hope you had a pleasant stay</div>
 
-      <div className="validation-errors">
+      <div className="errorList">
         {submitted &&
           errors &&
           errors.map((error) => <div key={error}>{error}</div>)}

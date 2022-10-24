@@ -8,7 +8,7 @@ import ReviewPortion from "../Review";
 import CreateReviewModal from '../CreateReview/reviewModal'
 import genericPic from './yuccavalley.png'
 import './singleSpot.css'
-
+import * as spotActions from '../../store/spot'
 
 
 const SpotDetail = () => {
@@ -22,8 +22,19 @@ const SpotDetail = () => {
     console.log(currentSpot)
     if(currentUser?.id === currentSpot.ownerId) isOwner = true
 
+    const handleEditSpotOnclick = async () => {
+      history.push(`/spots/${spotId}/edit`)
+    }
 
-
+    const handleDeleteSpot = () => {
+      if(window.confirm("are you sure you want to delete this spot?")) {
+          dispatch(spotActions.deleteSpotThunk(spotId))
+          .then(() => {
+              history.push("/user")
+              alert('Spot Deleted Successfully!')
+          })
+      }
+  }
 
 
     useEffect(()=> {
@@ -54,10 +65,10 @@ const SpotDetail = () => {
             </div>
 
             <div className="subImg-container">
-                <img src={currentSpot?.SpotImages?.[1]?.url}/>
-                <img src={currentSpot?.SpotImages?.[2]?.url}/>
-                <img src={currentSpot?.SpotImages?.[3]?.url}/>
-                <img src={currentSpot?.SpotImages?.[4]?.url}/>
+                <img className="subspot-image" src={currentSpot?.SpotImages?.[1]?.url}/>
+                <img className="subspot-image" src={currentSpot?.SpotImages?.[2]?.url}/>
+                <img className="subspot-image" src={currentSpot?.SpotImages?.[3]?.url}/>
+                <img className="subspot-image" src={currentSpot?.SpotImages?.[4]?.url}/>
             </div>
             </div>
         <div className="singleSpot-Container-Bot">
@@ -85,6 +96,18 @@ const SpotDetail = () => {
             </div>
           </div>
          </div>
+        <div>
+          {
+            isOwner &&
+            <button className="pr-submit-button" onClick={handleEditSpotOnclick} >Edit Spot</button>
+          }
+          </div>
+          <div>
+          {
+            isOwner &&
+            <button className="pr-submit-button" onClick={handleDeleteSpot} >Delete Spot</button>
+          }
+          </div>
          <div className="spot-linebreak long"></div>
 
 
@@ -97,6 +120,8 @@ const SpotDetail = () => {
             </span>
             <span>Reviews</span>
         </h2>
+
+
 
         <div>
           {

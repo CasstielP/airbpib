@@ -34,7 +34,7 @@ const handleSubmit = (e)  => {
     if (!name.length ) Errors.push("please enter a valid name")
     if (!description.length) Errors.push("please enter a valid description")
     if (!price || price <=0) Errors.push("please enter a valid price")
-    // if (!image.length || !image.includes(".jpg"||".jpeg"||".png"||".gif")) Errors.push("please enter a valid image url")
+    if (!image.length) Errors.push("please enter a valid image url")
     setErrors(Errors)
 
 

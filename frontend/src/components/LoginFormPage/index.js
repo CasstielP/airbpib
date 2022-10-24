@@ -20,16 +20,20 @@ function LoginFormPage() {
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
       .catch(async (res) => {
+        console.log(res)
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        console.log(data)
+        if (data.statusCode >= 400) setErrors([data.message]);
       });
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
+        <div className="validation-errors">
+          {errors.length > 0 && errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </div>
       <label>
         Username or Email
         <input

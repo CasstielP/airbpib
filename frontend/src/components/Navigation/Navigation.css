@@ -7,9 +7,10 @@
 .logo {
     display: flex;
     justify-content: space-between;
-    margin-top: 25px;
+    margin-top: 30px;
     margin-left: 10vw;
     width: 130px;
+
   }
 
 

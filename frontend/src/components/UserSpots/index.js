@@ -33,10 +33,10 @@ const UserSpots = () => {
         }
     }
 
-    const handleEditSpotOnclick = (spotId) => {
-        dispatch(spotActions.getOneSpot(spotId))
-        history.push(`/spots/${spotId}/edit`)
-    }
+    // const handleEditSpotOnclick = async (spotId) => {
+    //     // dispatch(spotActions.getOneSpot(spotId))
+    //     history.push(`/spots/${spotId}/edit`)
+    // }
 
     return (
         <>
@@ -44,7 +44,7 @@ const UserSpots = () => {
         <div className='pr-allspots-container'>
             {
                 ownedSpots.map((spot)=>(
-                    <Link style={{ textDecoration: "none", color: "black" }} to={`/spots/${spot.id}`}>
+                 <Link style={{ textDecoration: "none", color: "black" }} to={`/spots/${spot.id}`}>
                     <div className='spotCard-box'>
                         <img src={spot.previewImage} className='preview-img'/>
                         <div className='spotcard-content'>
@@ -57,8 +57,8 @@ const UserSpots = () => {
                            </div>
                         <div >{spot.name}</div>
                         <div><span className="bold">${spot.price}</span>   night</div>
-                        <div><button className="pr-submit-button" onClick={()=>handleEditSpotOnclick(spot.id)} >Edit Spot</button></div>
-                        <div><button className="pr-submit-button" value={spot.id} onClick={(e)=>handleDeleteSpot(e.target.value)}>Delete</button></div>
+                        {/* <div><button className="pr-submit-button" onClick={handleEditSpotOnclick} >Edit Spot</button></div> */}
+                        {/* <div><button className="pr-submit-button" value={spot.id} onClick={(e)=>handleDeleteSpot(e.target.value)}>Delete</button></div> */}
                         </div>
                     </div>
                 </Link>
