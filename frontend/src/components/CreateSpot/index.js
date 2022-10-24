@@ -162,6 +162,7 @@ return (
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                   placeholder='add image here'
+                  required
                 />
               </label>
               <button className="submit-button" type="submit">Create</button>

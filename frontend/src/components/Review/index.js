@@ -20,7 +20,7 @@ const ReviewPortion = (props) => {
         {
           reviews.map((review) => (
             <div className="single-review">
-              <h3>{review.User.firstName}{" "}{review.User.lastName}</h3>
+              <h3>{review?.User?.firstName}{" "}{review?.User?.lastName}</h3>
               <p className="single-review-stars">
                 {review.stars} ★
               </p>

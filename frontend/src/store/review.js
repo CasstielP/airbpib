@@ -69,11 +69,13 @@ export const getUserReviews = ()=> async (dispatch) =>{
 
 //thunk add new review
 export const createReview = (spotId, payload) => async (dispatch) => {
+    console.log('-------------------------')
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify(payload)
     })
+    console.log(response)
     if(response.ok) {
         const newReview = await response.json()
         dispatch(addReviews(newReview))

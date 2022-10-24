@@ -415,10 +415,14 @@ const validateNewReview = [
         .withMessage('Stars must be integer from 1 to 5'),
         handleValidationErrors
 ]
+
 router.post('/:spotId/reviews', validateNewReview, requireAuth, async (req, res)=> {
+    console.log('------------------------------1')
     const {review, stars} = req.body
     let userId = req.user.id
+    console.log('------------------------------2')
     const spot = await Spot.findByPk(req.params.spotId)
+    console.log('------------------------------3')
     if(!spot) {
         res.status(404)
         res.json({
@@ -426,15 +430,18 @@ router.post('/:spotId/reviews', validateNewReview, requireAuth, async (req, res)
             "statusCode": res.statusCode
         })
     }
+    console.log('------------------------------4')
 
     const allReview = await Review.findAll({
         where: {
             spotId: req.params.spotId
         }
     })
+    console.log('------------------------------5')
     for (let i=0; i<allReview.length; i++) {
+        console.log('------------------------------6')
         let singRev = allReview[i]
-        if(userId = singRev.userId){
+        if(userId === singRev.userId){
             res.status(403)
             res.json({
                 "message": "User already has a review for this spot",
@@ -442,6 +449,7 @@ router.post('/:spotId/reviews', validateNewReview, requireAuth, async (req, res)
             })
         }
     }
+    console.log('------------------------------7')
 
 
     const newReview = await Review.create({
@@ -451,6 +459,7 @@ router.post('/:spotId/reviews', validateNewReview, requireAuth, async (req, res)
         stars
     })
 
+    console.log('------------------------------8')
     res.status(201)
     res.json(newReview)
 })
