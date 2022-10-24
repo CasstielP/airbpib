@@ -76,15 +76,17 @@ function EditSpotPage() {
 
 
   return (
-    <>
+  <div className="ns-container">
+    <div className="ns-header-container">
       <h3>Spot Name</h3>
-      <form onSubmit={handleSubmit}>
-      <div>
+      <div className="errorList">
           {
-          isSubmitted &&
+            isSubmitted &&
           errors?.map((error)=>(<div key={error}>{error}</div>))
           }
         </div>
+      <div className="input-container inputField-wrapper">
+      <form onSubmit={handleSubmit}>
         <label>
           address
           <input
@@ -93,6 +95,7 @@ function EditSpotPage() {
             onChange={(e) => setAddress(e.target.value)}
           />
         </label>
+        <div className="form-break"></div>
         <label>
           city
           <input
@@ -101,6 +104,7 @@ function EditSpotPage() {
             onChange={(e) => setCity(e.target.value)}
           />
         </label>
+        <div className="form-break"></div>
         <label>
           state
           <input
@@ -109,6 +113,7 @@ function EditSpotPage() {
             onChange={(e) => setState(e.target.value)}
           />
         </label>
+        <div className="form-break"></div>
         <label>
           country
           <input
@@ -117,6 +122,7 @@ function EditSpotPage() {
             onChange={(e) => setCountry(e.target.value)}
           />
         </label>
+        <div className="form-break"></div>
         <label>
           latitude
           <input
@@ -125,6 +131,7 @@ function EditSpotPage() {
             onChange={(e) => setLat(e.target.value)}
           />
         </label>
+        <div className="form-break"></div>
         <label>
           longtitude
           <input
@@ -133,6 +140,7 @@ function EditSpotPage() {
             onChange={(e) => setLng(e.target.value)}
           />
         </label>
+        <div className="form-break"></div>
         <label>
           spot Name
           <input
@@ -141,6 +149,7 @@ function EditSpotPage() {
             onChange={(e) => setName(e.target.value)}
           />
         </label>
+        <div className="form-break"></div>
         <label>
           description
           <input
@@ -149,6 +158,7 @@ function EditSpotPage() {
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
+        <div className="form-break"></div>
         <label>
           price
           <input
@@ -157,9 +167,11 @@ function EditSpotPage() {
             onChange={(e) => setPrice(e.target.value)}
           />
         </label>
-        <button type="submit">Submit</button>
+        <button className="submit-button" type="submit">Submit</button>
       </form>
-    </>
+      </div>
+      </div>
+      </div>
   );
 }
 
