@@ -4,6 +4,9 @@ Airbpib is a clone full-stack web application inspired by airbnb.
 
 [visit the liveLink here](https://airbpibcpi.herokuapp.com/)
 
+## Wiki Link
+https://github.com/CasstielP/Front-End-Project/wiki
+
 Developed with the following languages frameworks, platforms and libraries
 ***
 # Backend
