@@ -10,7 +10,6 @@ import SpotDetail from "./components/SingleSpotPage";
 import ProfilePage from "./components/Profile";
 import EditSpotPage from "./components/EditSpot";
 import DeleteSpotForm from "./components/DeleteSpot";
-import EditReview from "./components/EditReviewPage";
 import UserSpots from "./components/SpotList/userSpotPage";
 
 function App() {
@@ -42,9 +41,6 @@ function App() {
           </Route>
           <Route exact path='/spots/:spotId/edit'>
             <EditSpotPage />
-          </Route>
-          <Route exact path='/reviews/:reviewId/edit'>
-            <EditReview />
           </Route>
           {/* <Route exact path='/spots/user'>
             <UserSpots />
