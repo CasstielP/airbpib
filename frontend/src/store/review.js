@@ -68,7 +68,7 @@ export const getUserReviews = ()=> async (dispatch) =>{
 
 
 //thunk add new review
-export const createReview = (payload, spotId, currentUser) => async (dispatch) => {
+export const createReview = (spotId, payload) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",
         headers: { "Content-Type": "application/json"},
@@ -76,11 +76,6 @@ export const createReview = (payload, spotId, currentUser) => async (dispatch) =
     })
     if(response.ok) {
         const newReview = await response.json()
-        const userData = {}
-        userData.id = currentUser.id
-        userData.firstName = currentUser.firstName
-        userData.lastName = currentUser.lastName
-        newReview.User = userData
         dispatch(addReviews(newReview))
         return newReview
     }
@@ -147,9 +142,8 @@ const reviewReducer = (state = initialState, action ) => {
 
 
         case ADD_REVIEW:
-        newState = {...state}
-        newState.userReviews = {...state.userReviews}
-        newState.spotReviews = {...state.spotReviews, [action.review.id]: action.review}
+        newState = {...state, spotReviews:{...state.spotReviews}}
+        newState.spotReviews[action.review.id] = action.review
         return newState
 
 

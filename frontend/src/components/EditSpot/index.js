@@ -9,8 +9,8 @@ function EditSpotPage() {
   const {spotId} = useParams();
   // console.log(spotId)
   const currentSpot = useSelector(state=>state.spot.singleSpot)
-  const currentSpotOwner = useSelector((state)=> state.session.user)
   console.log(currentSpot)
+  const currentSpotOwner = useSelector((state)=> state.session.user)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -25,16 +25,18 @@ function EditSpotPage() {
   const history = useHistory();
 
   useEffect(() => {
-    setAddress(currentSpot.address)
-    setCity(currentSpot.city)
-    setState(currentSpot.state)
-    setCountry(currentSpot.country)
-    setLat(currentSpot.lat)
-    setLng(currentSpot.lng)
-    setName(currentSpot.name)
-    setDescription(currentSpot.description)
-    setPrice(currentSpot.price)
-}, [])
+    if(currentSpot){
+      setAddress(currentSpot.address)
+      setCity(currentSpot.city)
+      setState(currentSpot.state)
+      setCountry(currentSpot.country)
+      setLat(currentSpot.lat)
+      setLng(currentSpot.lng)
+      setName(currentSpot.name)
+      setDescription(currentSpot.description)
+      setPrice(currentSpot.price)
+    }
+}, [currentSpot])
 
 
   const handleSubmit = (e) => {

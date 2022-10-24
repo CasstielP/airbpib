@@ -10,7 +10,9 @@ function EditReview() {
 
     const [review, setReview] = useState(currentReview.review)
     const [stars, setStars] = useState(currentReview.stars)
+    const handleReviewSubmit = ()=> {
 
+    }
 
     return (
         <form onSubmit={handleReviewSubmit} >

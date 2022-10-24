@@ -1,0 +1,46 @@
+.single-review {
+    font-weight: bolder;
+    margin-bottom: 30px;
+  }
+
+  .single-review h3 {
+    margin-bottom: -10px;
+  }
+
+  .single-review-content {
+    margin-right: 20px;
+  }
+
+  .single-review-image {
+    width: 220px;
+    height: 170px;
+    border-radius: 4px;
+    margin-right: 4px;
+    object-fit: cover;
+  }
+
+  .my-single-image {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 6px;
+  }
+
+
+  .rv-submit-button {
+    width: 11%;
+    /* padding: 10px; */
+    margin: 0px 0px 5px -3px;
+    size: 50%;
+    border: 1px #ff385c solid;
+    border-radius: 4px;
+    background: #ff385c;
+    color: white;
+    font: bold;
+  }
+
+  .rv-submit-button:hover {
+    background: white;
+    border: 1px #ff385c solid;
+    color:#ff385c;
+  }

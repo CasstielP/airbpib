@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import * as reviewActions from '../../store/review'
 import { useEffect } from 'react'
-
+import './review.css'
 
 
 
@@ -25,21 +25,68 @@ const UserReviews = () => {
 
 
     return (
-        <div>
-            <div>
-                <div>
-                    {userReviews.map((review)=> (
-                        <div key={review.id}>
-                            <div>{review.User.firstName}</div>
-                            <div>{review.stars}⭐</div>
-                            <div>{review.review}</div>
-                            <button onClick={()=>handleDeleteReview(review.id)} >Delete Review</button>
-                        </div>
-                    ))
-                    }
-                </div>
+
+
+        <>
+        {/* <h2>Your Reivews</h2> */}
+        {
+          userReviews.map((review) => (
+            <div className="single-review">
+
+              <h3>{review.User.firstName}{" "}{review.User.lastName}</h3>
+              <p className="single-review-stars">
+                {review.stars} ★
+              </p>
+              <p className="single-review-content">
+                <span>
+                  "{review.review}"
+                </span>
+              </p>
+              <div>
+                {
+                  review.ReviewImages &&
+                  review.ReviewImages.map((image) => {
+                    return (
+                      <img
+                      className="single-review-image"
+                      src={image.url} />
+                    )
+                  })
+                }
+              </div>
+              <button className='rv-submit-button' onClick={()=>handleDeleteReview(review.id)} >Delete Review</button>
             </div>
-        </div>
+          ))
+        }
+        </>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // <div>
+        //     <div>
+        //         <div>
+        //             {userReviews.map((review)=> (
+        //                 <div key={review.id}>
+        //                     <div>{review.User.firstName}</div>
+        //                     <div>{review.stars}⭐</div>
+        //                     <div>{review.review}</div>
+        //                     <button onClick={()=>handleDeleteReview(review.id)} >Delete Review</button>
+        //                 </div>
+        //             ))
+        //             }
+        //         </div>
+        //     </div>
+        // </div>
     )
 
 

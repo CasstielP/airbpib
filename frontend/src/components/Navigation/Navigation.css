@@ -82,7 +82,7 @@
   }
 
 
-/*
+
   .currentuser-wrapper {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -114,4 +114,18 @@
   .menu-select:hover {
     background-color: rgb(187, 200, 228, 0.3);
     cursor: pointer;
-  } */
+  }
+
+
+  .pfdropdownMenulogin {
+    border: solid rgb(187, 200, 228, 0.3) 0.1px;
+    box-shadow: 0px 0px 10px rgb(187, 200, 228, 0.7);
+    background-color: white;
+    border-radius: 15px;
+    top: 83px;
+    position: absolute;
+    height: 220px;
+    width: 200px;
+    z-index: 5000;
+    padding-top: 11px;
+  }

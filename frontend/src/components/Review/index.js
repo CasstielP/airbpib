@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { loadAllReviews } from "../../store/review";
+import './review.css'
 const ReviewPortion = (props) => {
 
     const dispatch = useDispatch()
@@ -16,23 +17,35 @@ const ReviewPortion = (props) => {
 
     return (
         <>
-        <div>
-            {
-                reviews.map((review)=> {
+        {
+          reviews.map((review) => (
+            <div className="single-review">
+              <h3>{review.User.firstName}{" "}{review.User.lastName}</h3>
+              <p className="single-review-stars">
+                {review.stars} ★
+              </p>
+              <p className="single-review-content">
+                <span>
+                  "{review.review}"
+                </span>
+              </p>
+              <div>
+                {
+                  review.ReviewImages &&
+                  review.ReviewImages.map((image) => {
                     return (
-                        <div  key={review.id}>
-                            <div>{review.User.firstName}</div>
-                            <div>{review.stars}⭐</div>
-                            <div>{review.review}</div>
-                        </div>
+                      <img
+                      className="single-review-image"
+                      src={image.url} />
                     )
-                })
-            }
-        </div>
+                  })
+                }
+              </div>
+            </div>
+          ))
+        }
         </>
     )
-
-
 }
 
 export default ReviewPortion

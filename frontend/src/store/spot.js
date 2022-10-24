@@ -125,6 +125,7 @@ export const createSpotImage = (img, spotId)=> async (dispatch) => {
         },
         body:JSON.stringify(img)
     })
+    console.log('=------------------------',response)
     if(response.ok) {
         const image = await response.json()
         dispatch(addImage(spotId, image))
@@ -208,8 +209,9 @@ const spotReducer = (state = initialState, action) => {
         return newSpots
 
         case ADD_IMAGE:
-            newSpots = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
-            newSpots.allSpots[action.spotId].previewImage = action.url
+            console.log(action.spotId)
+            newSpots = {...state, allSpots: {...state.allSpots, [action.spotId.id]:{...action.spotId}}, singleSpot: {...state.singleSpot}}
+            newSpots.allSpots[action.spotId.id].previewImage = action.spotId.url
             return newSpots
 
         default:
