@@ -78,7 +78,7 @@ function EditSpotPage() {
   return (
   <div className="ns-container">
     <div className="ns-header-container">
-      <h3>Spot Name</h3>
+      <h3>Edit Your Spot</h3>
       <div className="errorList">
           {
             isSubmitted &&
