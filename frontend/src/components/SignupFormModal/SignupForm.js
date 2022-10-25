@@ -21,13 +21,17 @@ function SignupForm({onClose, setShowSignup}) {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ firstName,lastName, email, username, password }))
+      return dispatch(sessionActions.signup({ firstName, lastName, email, username, password }))
       .then(() => {
         setShowSignup(false)
       })
         .catch(async (res) => {
           const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
+          const beErrors = []
+          if (data) {
+            beErrors.push(data.message)
+            setErrors(beErrors)
+          };
         });
     }
     return setErrors(['Password entered must be the same']);

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import UserReviews from '../Review/userReview';
 // import UserSpots from '../SpotList/userSpotPage';
 import UserSpots from '../UserSpots'
@@ -11,6 +11,7 @@ const ProfilePage = () => {
     const currentUser = useSelector(state=> state.session.user)
     const {username} = currentUser
 
+    // if(!currentUser) return <Redirect to="/" />;
 
     return (
 

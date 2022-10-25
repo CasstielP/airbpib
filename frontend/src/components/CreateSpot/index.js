@@ -31,10 +31,12 @@ const handleSubmit = (e)  => {
     if (!city.length) Errors.push("city must not be empty")
     if (!state.length) Errors.push("state must not be empty")
     if (!country.length) Errors.push("country must not be empty")
+    if (!lat.length) Errors.push('must enter a latitude')
+    if (!lng.length) Errors.push('must have a longtitude')
     if (!name.length ) Errors.push("please enter a valid name")
     if (!description.length) Errors.push("please enter a valid description")
     if (!price || price <=0) Errors.push("please enter a valid price")
-    if (!image.length) Errors.push("please enter a valid image url")
+    if (!image.length || image.length > 255 || !image.includes(".jpg"||".jpeg"||".png"||".gif")) Errors.push("please enter a valid image url less than 255 characters long")
     setErrors(Errors)
 
 
