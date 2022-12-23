@@ -26,31 +26,19 @@
 }
 
 .spotcard-content{
-    display: grid;
-    height: 100px;
-    width: 90%;
-    grid-template-columns: 3fr 1.5fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    max-width: 285px;
+    justify-content: space-between;
 }
+
+
 
 .bold{
     font-weight: bold;
 }
 
-/* .submit-button {
-    width: 99%;
-    padding: 10px;
-    margin: 0px 0px 5px -3px;
-    size: 50%;
-    border: 1px #ff385c solid;
-    border-radius: 4px;
-    background: #ff385c;
-    color: white;
-    font: bold;
-  }
-
-  .submit-button:hover {
-    background: white;
-    border: 1px #ff385c solid;
-    color:#ff385c;
-  } */
+.spc-info-left{
+    display: flex;
+    flex-direction: column;
+}

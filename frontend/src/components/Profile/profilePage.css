@@ -27,13 +27,6 @@
     margin: 15px;
 }
 
-.spotcard-content{
-    display: grid;
-    height: 100px;
-    width: 90%;
-    grid-template-columns: 3fr 1.5fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-}
 
 .bold{
     font-weight: bold;

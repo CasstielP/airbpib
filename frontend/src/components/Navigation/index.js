@@ -30,7 +30,6 @@ function Navigation(){
 
   return (
     <div>
-
     <LoginFormModal
       showLogin={showLogin}
       setShowLogin={setShowLogin}

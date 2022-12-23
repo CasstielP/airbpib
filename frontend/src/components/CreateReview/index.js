@@ -43,9 +43,6 @@ const CreateReview = ({ spotId, setShowModal }) => {
         }
       })
     if(newReview) setShowModal(false)
-
-
-
   };
 
   return (
