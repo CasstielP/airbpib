@@ -14,7 +14,7 @@
 .preview-img{
     width: 290px;
     height: 265px;
-    border-radius: 24px;
+    border-radius: 15px;
     object-fit: cover;
 }
 
@@ -28,8 +28,10 @@
 .spotcard-content{
     display: flex;
     flex-direction: row;
-    max-width: 285px;
+    max-width: 275px;
     justify-content: space-between;
+    margin-left: 5px;
+
 }
 
 

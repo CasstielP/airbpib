@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <div className="wrapper">
+      {/* <div className="wrapper"> */}
 
       <button onClick={openMenu} className="pfbutton">
       <span className="material-symbols-outlined">menu</span>
@@ -84,7 +84,7 @@ function ProfileButton({ user }) {
 
 )}
 
-</div>
+{/* </div> */}
   </>
   );
 }

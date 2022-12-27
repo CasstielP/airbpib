@@ -9,6 +9,7 @@ import CreateReviewModal from '../CreateReview/reviewModal'
 import genericPic from './yuccavalley.png'
 import './singleSpot.css'
 import * as spotActions from '../../store/spot'
+import * as reviewActions from '../../store/review'
 
 
 const SpotDetail = () => {
@@ -19,6 +20,8 @@ const SpotDetail = () => {
     let isOwner = false
     const currentSpot = useSelector(state=>state.spot.singleSpot)
     const currentUser = useSelector(state=> state.session.user)
+    const spotReviews = useSelector(state=> Object.values(state.review.spotReviews))
+
     console.log(currentSpot)
     if(currentUser?.id === currentSpot.ownerId) isOwner = true
 
@@ -39,6 +42,7 @@ const SpotDetail = () => {
 
     useEffect(()=> {
         dispatch(getOneSpot(spotId))
+        dispatch(reviewActions.loadAllReviews(spotId))
     }, [dispatch, spotId])
 
 
@@ -54,6 +58,7 @@ const SpotDetail = () => {
               (<span>★ {currentSpot.avgRating}  ·  </span>):
               (<span>★ New  ·  </span>)
             }
+            <span>{spotReviews.length} reviews   ·  </span>
             <span>{currentSpot.city}, {currentSpot.state}, {currentSpot.country}</span>
             {/* <span>Entire Spot hosted by {currentSpot?.Owner?.firstName}  ·  </span> */}
             </div>
@@ -83,17 +88,47 @@ const SpotDetail = () => {
             <div className="price-rating-container">
             <div className="prc-header">
               <div>
-                <span className="one-spot-price">${currentSpot.price}</span> night
+                <span className="one-spot-price">${currentSpot.price}</span> <span id='bk-price'>night</span>
               </div>
+              <div id='bk-topright'>
             <div className="pr-review">
                   <span>
                   {currentSpot.avgRating ?
-                    (<span className="bold">★ {currentSpot.avgRating}</span>):
-                    (<span className="bold">★ New</span>)
+                    (<span  className="bold bk-tr-star">★ {currentSpot.avgRating}</span>):
+                    (<span className="bold bk-tr-star">★ New</span>)
                   }
                   </span>
+                  <span id='bk-rev-num'>· {spotReviews.length} reviews</span>
+              </div>
               </div>
             </div>
+            <form>
+              <div>
+                  <label>CHECK-IN</label>
+                  <input
+                  type='date'
+                  ></input>
+              </div>
+              <div>
+              <label>CHECK-OUT</label>
+                  <input
+                  type='date'
+                  ></input>
+              </div>
+              <div>
+                <label>Guest</label>
+                <select>
+                  <option>1 guest</option>
+                  <option>2 guests</option>
+                  <option>3 guests</option>
+                  <option>4 guests</option>
+                  <option>5 guests</option>
+                  <option>6 guests</option>
+                </select>
+              </div>
+              <button type='submit'>Reserve</button>
+              <div>you won't be charged yet</div>
+            </form>
           </div>
          </div>
         <div>
@@ -133,7 +168,7 @@ const SpotDetail = () => {
 
 
         <div className="spot-review-container">
-          <ReviewPortion spotId={spotId}/>
+          <ReviewPortion spotReviews={spotReviews}/>
         </div>
         </div>
 

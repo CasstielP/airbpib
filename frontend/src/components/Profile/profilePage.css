@@ -13,12 +13,6 @@
     /* flex-wrap: wrap; */
 }
 
-.preview-img{
-    width: 290px;
-    height: 265px;
-    border-radius: 24px;
-    object-fit: cover;
-}
 
 .spotCard-box{
     cursor: pointer;

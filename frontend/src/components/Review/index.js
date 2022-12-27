@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { loadAllReviews } from "../../store/review";
+// import { loadAllReviews } from "../../store/review";
 import './review.css'
-const ReviewPortion = (props) => {
+const ReviewPortion = ({spotReviews}) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const {spotId} = props
-    const reviews = useSelector(state=>Object.values(state.review.spotReviews))
+    // const {spotId} = props
+    // const reviews = useSelector(state=>Object.values(state.review.spotReviews))
 
-    useEffect(()=> {
-        dispatch(loadAllReviews(spotId))
-    },[])
+    // useEffect(()=> {
+    //     dispatch(loadAllReviews(spotId))
+    // },[])
 
 
     return (
         <>
         {
-          reviews.map((review) => (
+          spotReviews.map((review) => (
             <div className="single-review">
               <h3>{review?.User?.firstName}{" "}{review?.User?.lastName}</h3>
               <p className="single-review-stars">

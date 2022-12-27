@@ -28,7 +28,7 @@ function HomePageButton ({setShowLogin, setShowSignup}) {
     return (
         <>
 
-      <div className="wrapper">
+      {/* <div className="wrapper"> */}
 
         <button onClick={openMenu} className="pfbutton">
             <span className="material-symbols-outlined">menu</span>
@@ -63,7 +63,7 @@ function HomePageButton ({setShowLogin, setShowSignup}) {
 
         )}
 
-      </div>
+      {/* </div> */}
     </>
 
       );
