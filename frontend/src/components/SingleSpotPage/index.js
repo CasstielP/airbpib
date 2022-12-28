@@ -10,7 +10,7 @@ import genericPic from './yuccavalley.png'
 import './singleSpot.css'
 import * as spotActions from '../../store/spot'
 import * as reviewActions from '../../store/review'
-
+import * as bookingActions from '../../store/booking'
 
 const SpotDetail = () => {
     const {spotId} = useParams();
@@ -21,8 +21,11 @@ const SpotDetail = () => {
     const currentSpot = useSelector(state=>state.spot.singleSpot)
     const currentUser = useSelector(state=> state.session.user)
     const spotReviews = useSelector(state=> Object.values(state.review.spotReviews))
+    const currentBookings = useSelector(state=> state.booking.allBookings)
+    console.log(currentBookings)
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
 
-    console.log(currentSpot)
     if(currentUser?.id === currentSpot.ownerId) isOwner = true
 
     const handleEditSpotOnclick = async () => {
@@ -43,8 +46,15 @@ const SpotDetail = () => {
     useEffect(()=> {
         dispatch(getOneSpot(spotId))
         dispatch(reviewActions.loadAllReviews(spotId))
+        dispatch(bookingActions.fetchAllBookings(spotId))
     }, [dispatch, spotId])
 
+
+    const handleBooking = (e) => {
+      e.preventDefault()
+      console.log('sssssssssssssssss',startDate)
+      console.log('eeeeeeeeeeeeeeeee',endDate)
+    }
 
     return (
         <>
@@ -102,17 +112,21 @@ const SpotDetail = () => {
               </div>
               </div>
             </div>
-            <form>
+            <form onSubmit={handleBooking}>
               <div>
                   <label>CHECK-IN</label>
                   <input
                   type='date'
+                  value={startDate}
+                  onChange={(e)=>setStartDate(e.target.value)}
                   ></input>
               </div>
               <div>
               <label>CHECK-OUT</label>
                   <input
                   type='date'
+                  value={endDate}
+                  onChange={(e)=>setEndDate(e.target.value)}
                   ></input>
               </div>
               <div>
