@@ -516,8 +516,8 @@ router.post('/:spotId/bookings', validateDates, requireAuth, async (req, res)=> 
     if(!spot){
         res.status(404)
         res.json({
-            "message": "Spot couldn't be found",
-            "statusCode": res.statusCode
+            message: "Spot couldn't be found",
+            statusCode: res.statusCode
         })
     }
     if(userId === spot.userId) {

@@ -22,7 +22,7 @@ const SpotDetail = () => {
   const currentUser = useSelector(state => state.session.user)
   const spotReviews = useSelector(state => Object.values(state.review.spotReviews))
   const currentBookings = useSelector(state => state.booking.allBookings)
-  console.log(currentBookings)
+  // console.log(currentBookings)
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [errors, setErrors] = useState([])
@@ -51,9 +51,21 @@ const SpotDetail = () => {
   }, [dispatch, spotId])
 
 
-  const handleBooking = (e) => {
+  const handleBooking = async(e) => {
     e.preventDefault()
-    dispatch(bookingActions.createBookingThunk(spotId, payload))
+    let Errors = []
+    const payload = {
+      startDate,
+      endDate
+    }
+    let res = dispatch(bookingActions.createBookingThunk(spotId, payload))
+    .then(async(res)=> {
+      if(res){
+        console.log(await res.text)
+      }else{
+        alert('booking successful')
+      }
+    })
   }
 
   return (

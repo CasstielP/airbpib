@@ -116,6 +116,12 @@ const bookingReducer = (state=initialState, action)=> {
         newState = {...state, userBookings:{}}
         action.bookings.Bookings.forEach((booking)=> newState.allBookings[booking.id] = booking)
         return newState
+
+        case CREATE_BOOKING:
+        newState = {...state, allBookings:{...state.allBookings}}
+        newState.allBookings[action.booking.id] =action.booking
+        return newState
+
         default:
             return state;
     }
