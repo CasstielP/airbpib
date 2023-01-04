@@ -51,19 +51,18 @@ const SpotDetail = () => {
   }, [dispatch, spotId])
 
 
-  const handleBooking = async(e) => {
+  const handleBooking = (e) => {
     e.preventDefault()
     let Errors = []
     const payload = {
       startDate,
       endDate
     }
-    let res = dispatch(bookingActions.createBookingThunk(spotId, payload))
-    .then(async(res)=> {
-      if(res){
-        console.log(await res.text)
-      }else{
-        alert('booking successful')
+    return dispatch(bookingActions.createBookingThunk(spotId, payload))
+    .catch(async(res)=> {
+      const data = await res.json()
+      if(data.statusCode >= 400){
+        setErrors([data.message])
       }
     })
   }

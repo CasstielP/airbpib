@@ -67,9 +67,18 @@ export const createBookingThunk = (spotId, payload)=> async(dispatch)=>{
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify(payload)
     })
-    if(res.ok) {
+        // const newBooking = await res.json()
+        // dispatch(createBooking(newBooking))
+
+    if(res.status < 400) {
         const newBooking = await res.json()
         dispatch(createBooking(newBooking))
+        return res
+    }
+    else{
+        const errorRes = await res.json()
+        console.log('thunk got here qqqqqqqqqqqqqqqqq', errorRes)
+        return res
     }
 }
 
