@@ -54,17 +54,22 @@ const SpotDetail = () => {
   const handleBooking = (e) => {
     e.preventDefault()
     let Errors = []
-    const payload = {
-      startDate,
-      endDate
+    if(!startDate || !endDate){
+      setErrors(['Must enter valid dates'])
     }
-    return dispatch(bookingActions.createBookingThunk(spotId, payload))
-    .catch(async(res)=> {
-      const data = await res.json()
-      if(data.statusCode >= 400){
-        setErrors([data.message])
+    else{
+      const payload = {
+        startDate,
+        endDate
       }
-    })
+      return dispatch(bookingActions.createBookingThunk(spotId, payload))
+      .catch(async(res)=> {
+        const data = await res.json()
+        if(data.statusCode >= 400){
+          setErrors([data.message])
+        }
+      })
+    }
   }
 
   return (
