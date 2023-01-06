@@ -33,10 +33,13 @@ const SpotDetail = () => {
   let days = (new Date(endDate) - new Date(startDate))/1000/60/60/24
   console.log('daysNunmdaysNunmdaysNunmdaysNunmdaysNunm',  days)
   let totalPrice=0;
+  let cleaningFee = 125
+  let serviceFee = 200
+  let finalPrice=0;
   if (days>0) {
-    totalPrice = currentSpot.price * guestNum * days;
+    totalPrice = currentSpot.price * days;
+    finalPrice = totalPrice + cleaningFee + serviceFee
   }
-
 
 
   if (currentUser?.id === currentSpot.ownerId) isOwner = true
@@ -180,7 +183,26 @@ const SpotDetail = () => {
               </div>
               <button id='bk-btn' type='submit'>Reserve</button>
               <div id='bk_fine_text'>you won't be charged yet</div>
-              <div>total price before tax: ${totalPrice}</div>
+              <div className="bk_fee_item">
+              <div className="bk_fees">${currentSpot.price} x {days} nights</div>
+              <div className="bk_fee_misc_price">${currentSpot.price * days}</div>
+              </div>
+              <div className="bk_fee_item">
+              <div className="bk_fees">Cleaning fee</div>
+              <div className="bk_fee_misc_price">$125</div>
+              </div>
+              <div className="bk_fee_item">
+              <div className="bk_fees">Service fee</div>
+              <div className="bk_fee_misc_price">$200</div>
+              </div>
+              <div className="linebreak"></div>
+
+              <div className="bk_total_price">
+              <div id='bk-total'>Total price before taxes: </div>
+              <div id='bk-total'>
+              ${finalPrice}
+              </div>
+              </div>
             </form>
           </div>
         </div>

@@ -74,10 +74,11 @@
     border: solid rgb(187, 200, 228, 0.3) 0.1px;
     box-shadow: 0px 0px 10px rgb(187, 200, 228, 0.7);
     /* height: 22vh; */
-    height: 300px;
-    width: 100%;
+    height: 480px;
+    /* width: 100%; */
+    width: 372px;
     margin: 40px 0px 40px 10px;
-    padding: 20px 0px 0px 20px;
+    padding: 20px;
   }
 
   .prc-header {
@@ -213,7 +214,7 @@
   border-left: none;
   border-top: none;
   border-bottom: none;
-  width: 215px;
+  width: 160px;
   justify-content: center;
 }
 .booking-label{
@@ -227,7 +228,7 @@
   justify-content: center;
   /* border: solid #c8c8c8 1px;
   border-left: none; */
-  width: 215px;
+  width: 160px;
 }
 #ck-guest{
   display: flex;
@@ -237,7 +238,7 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   margin-bottom: 50px;
-  width: 431px;
+  width: 320px;
   justify-content: center;
   align-items: center;
 }
@@ -252,9 +253,47 @@
 
 .bk-form{
   align-items: center;
+  max-width: 372px;
 }
 #bk_fine_text{
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 14px;
   color: #7e7e7e;
+  margin-bottom: 20px;
+}
+#bk-total{
+  font-weight: bold;
+  font-size: 18px;
+}
+.linebreak{
+  /* display: flex; */
+  background-color: rgb(96, 123, 198, 0.2);
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 85%;
+  height: 1.5px;
+}
+.bk_fee_item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 320px;
+}
+.bk_fees{
+  /* margin-right: 180px; */
+  margin-bottom: 14px;
+  text-decoration: underline;
+  color: #5c5c5c;
+  max-width:200px;
+
+}
+
+.bk_fee_misc_price{
+  color: #5c5c5c;
+}
+.bk_total_price{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 320px;
 }
