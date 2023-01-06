@@ -74,7 +74,7 @@
     border: solid rgb(187, 200, 228, 0.3) 0.1px;
     box-shadow: 0px 0px 10px rgb(187, 200, 228, 0.7);
     /* height: 22vh; */
-    height: 250px;
+    height: 300px;
     width: 100%;
     margin: 40px 0px 40px 10px;
     padding: 20px 0px 0px 20px;
@@ -195,4 +195,66 @@
 #bk-price{
   color: #7e7e7e;
   font-size: 16px;
+}
+.ckin-out{
+  display: flex;
+  flex-direction: row;
+  border: solid #c8c8c8 1px;
+  border-bottom-left-radius: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: none;
+  height: 60px;
+}
+.ckin{
+  display: flex;
+  flex-direction: column;
+  border: solid #c8c8c8 1px;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  width: 215px;
+  justify-content: center;
+}
+.booking-label{
+  padding: 5px;
+  margin-top: 5px;
+}
+.ckout{
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  justify-content: center;
+  /* border: solid #c8c8c8 1px;
+  border-left: none; */
+  width: 215px;
+}
+#ck-guest{
+  display: flex;
+  border: solid #c8c8c8 1px;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 50px;
+  width: 431px;
+  justify-content: center;
+  align-items: center;
+}
+#bk-btn{
+ width: 320px;
+ height: 47px;
+ background-color: #e41d56;
+ border: none;
+ border-radius: 10px;
+ color: white;
+}
+
+.bk-form{
+  align-items: center;
+}
+#bk_fine_text{
+  margin-top: 10px;
+  font-size: 12px;
+  color: #7e7e7e;
 }

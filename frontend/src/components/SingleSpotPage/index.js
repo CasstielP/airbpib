@@ -25,7 +25,19 @@ const SpotDetail = () => {
   // console.log(currentBookings)
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
+  const [guestNum, setGuestNum] = useState(1)
   const [errors, setErrors] = useState([])
+  const [bkPrice, setBkPrice] = useState(0)
+
+
+  let days = (new Date(endDate) - new Date(startDate))/1000/60/60/24
+  console.log('daysNunmdaysNunmdaysNunmdaysNunmdaysNunm',  days)
+  let totalPrice=0;
+  if (days>0) {
+    totalPrice = currentSpot.price * guestNum * days;
+  }
+
+
 
   if (currentUser?.id === currentSpot.ownerId) isOwner = true
 
@@ -133,36 +145,42 @@ const SpotDetail = () => {
                 </div>
               </div>
             </div>
-            <form onSubmit={handleBooking}>
-              <div>
-                <label>CHECK-IN</label>
+            <form className="bk-form" onSubmit={handleBooking}>
+              <div className="ckin-out">
+              <div className="ckin">
+                <label className="booking-label">CHECK-IN</label>
                 <input
                   type='date'
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
                 ></input>
               </div>
-              <div>
-                <label>CHECK-OUT</label>
+              <div className="ckout">
+                <label className="booking-label">CHECK-OUT</label>
                 <input
                   type='date'
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
                 ></input>
               </div>
-              <div>
+              </div>
+              <div id='ck-guest'>
                 <label>Guest</label>
-                <select>
-                  <option>1 guest</option>
-                  <option>2 guests</option>
-                  <option>3 guests</option>
-                  <option>4 guests</option>
-                  <option>5 guests</option>
-                  <option>6 guests</option>
+                <select
+                value={guestNum}
+                onChange={(e)=> setGuestNum(e.target.value)}
+                >
+                  <option value='1'>1 guest</option>
+                  <option value='2'>2 guests</option>
+                  <option value='3'>3 guests</option>
+                  <option value='4'>4 guests</option>
+                  <option value='5'>5 guests</option>
+                  <option value='6'>6 guests</option>
                 </select>
               </div>
-              <button type='submit'>Reserve</button>
-              <div>you won't be charged yet</div>
+              <button id='bk-btn' type='submit'>Reserve</button>
+              <div id='bk_fine_text'>you won't be charged yet</div>
+              <div>total price before tax: ${totalPrice}</div>
             </form>
           </div>
         </div>
