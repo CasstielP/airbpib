@@ -206,6 +206,7 @@
   border-top-right-radius: 10px;
   border-bottom: none;
   height: 60px;
+  width: 320px;
 }
 .ckin{
   display: flex;

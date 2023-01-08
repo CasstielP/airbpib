@@ -8,6 +8,7 @@ import "./Navigation.css";
 import logo from "./logov3.png";
 import HomePageButton from "./HomePageButton";
 import "./Navigation.css";
+import SearchBar from "./searchBar";
 
 function Navigation() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -36,6 +37,8 @@ function Navigation() {
         <NavLink exact to="/">
           <img className="logo" src={logo} />
         </NavLink>
+
+        <SearchBar />
 
         <div className="nav-right">
           <div id='host-home'>Airbnb your home</div>

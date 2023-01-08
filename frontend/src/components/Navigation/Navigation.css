@@ -162,3 +162,21 @@
 #host-home:hover{
   background-color: #f7f7f7;
 }
+.search-wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: grey solid 1px;
+  border-radius: 25px;
+  width: 360px;
+  height: 45px;
+}
+.searchInputs{
+  margin-left: 6px;
+}
+#search-icon{
+  width: 48px;
+  height: 48px;
+
+}
