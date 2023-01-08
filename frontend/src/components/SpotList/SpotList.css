@@ -6,9 +6,15 @@
 
 .allspots-container{
     display: flex;
-    justify-content: space-between;
-    margin: 80px 90px;
+    justify-content: space-evenly;
+    /* margin: 80px 90px; */
+    margin: 20px;
     flex-flow: row wrap;
+}
+.allspots_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .preview-img{

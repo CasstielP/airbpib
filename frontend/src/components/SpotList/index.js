@@ -17,12 +17,15 @@ const SpotList = ()=> {
 
     return (
         <>
+        <div className='allspots_wrapper'>
             <div className='allspots-container'>
                 { spotsArr.map((spot)=>
                         <SpotCard key={spot.id} spot={spot}/>
                     )
                 }
             </div>
+        </div>
+
 
         </>
     )
