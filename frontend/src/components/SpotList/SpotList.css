@@ -7,7 +7,7 @@
 .allspots-container{
     display: flex;
     justify-content: space-between;
-    margin: 140px 90px;
+    margin: 80px 90px;
     flex-flow: row wrap;
 }
 

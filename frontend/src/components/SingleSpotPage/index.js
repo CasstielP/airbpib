@@ -11,6 +11,10 @@ import './singleSpot.css'
 import * as spotActions from '../../store/spot'
 import * as reviewActions from '../../store/review'
 import * as bookingActions from '../../store/booking'
+import countertop from './countertops.png'
+import badge from './badge.png'
+import key from './key.png'
+import aircover from './aircover.png'
 
 const SpotDetail = () => {
   const { spotId } = useParams();
@@ -122,7 +126,45 @@ const SpotDetail = () => {
             <h2>Entire spot Hosted by {currentSpot?.Owner?.firstName}</h2>
           </div>
           <div className="spot-linebreak"></div>
-          <div><p>{currentSpot.description}</p></div>
+          <div className="spot-detail">
+            {/* <p>{currentSpot.description}</p> */}
+          <div className="sig_spot_linebreak"></div>
+          <div className="spot_badge_info">
+            <div className="spt_badge_info_wrapper">
+              <img className="spt_badge_icon" src={countertop} />
+              <div>
+                <div className="spt_badge_headline">Dedicated workspace</div>
+                <div className="spt_badge_desc">A private room with wifi that’s well-suited for working.</div>
+              </div>
+            </div>
+            <div className="spt_badge_info_wrapper">
+              <img className="spt_badge_icon" src={badge} />
+              <div>
+                <div  className="spt_badge_headline">{currentSpot.Owner?.firstName} is a Superhost</div>
+                <div  className="spt_badge_desc">A private room with wifi that’s well-suited for working.</div>
+              </div>
+            </div>
+            <div  className="spt_badge_info_wrapper">
+              <img className="spt_badge_icon" src={key} />
+              <div>
+              <div  className="spt_badge_headline">
+              Great check-in experience
+              </div>
+              <div>
+                <div  className="spt_badge_desc">100% of recent guests gave the check-in process a 5-star rating.</div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div className="sig_spot_linebreak-btm"></div>
+          <div className="aircover">
+            <img id='aircoverpic' src={aircover} />
+            <div id='aircovertext'>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</div>
+          </div>
+          <div className="sig_spot_linebreak-btm"></div>
+
+
+          </div>
 
 
 

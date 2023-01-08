@@ -175,7 +175,7 @@
 }
 .searchInputs{
   margin-left: 10px;
-  width: 200px;
+  width: 280px;
 }
 #search-icon{
   width: 48px;
@@ -200,26 +200,44 @@
 
 .data-result{
   z-index: 2000;
-  position: relative;
+  position: absolute;
   background-color: white;
   border-radius: 20px;
-  /* padding-left: 30px; */
+  border: #ebebeb solid 1px;
+  border-top: none;
+  width: 362px;
 
 }
 
 #search-res-pic{
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   }
   #search-res-text{
-    font-weight: bold;
+
   }
   .data-item{
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 5px;
+    margin: 10px;
   }
+  .data-item:hover{
+    background-color: #f7f7f7;
+  }
+
   #sb-space{
     width: 10px;
   }
+  #res_icon_wrapper{
+    background-color: #ebebeb;
+    border-radius: 7px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}

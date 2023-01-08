@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as spotActions from '../../store/spot'
 import search from './search.png'
-
+import location from './location.png'
 const SearchBar = () => {
     const dispatch = useDispatch()
 
@@ -61,12 +61,15 @@ search
                     {filteredData.map((value)=>{
                         return <div className='res-row'>
                                 <NavLink className='data-item'
+                                style={{ textDecoration: "none", color: "black" }}
                                 key={value.id}
-                                to='/'
+                                to={`/spots/${value.id}`}
                                 onClick={clearInput}
                                 >
                                     <div id='sb-space'></div>
-                         <img id='search-res-pic' src={search}></img>
+                                    <div id='res_icon_wrapper'>
+                         <img id='search-res-pic' src={location}></img>
+                                    </div>
                          <p id='search-res-text'>{value.city}</p>
                         </NavLink>
                             </div>
