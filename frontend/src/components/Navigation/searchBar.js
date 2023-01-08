@@ -16,7 +16,17 @@ const SearchBar = () => {
     }, [])
 
     const handleFilter = (e) => {
-
+        const searchWord = e.target.value
+        setWordEntered(searchWord)
+        const newFilter = spots.filter((spot)=> {
+            console.log(spot.city.toLowerCase().split(' ').includes(searchWord.toLowerCase()))
+            return spot.city.toLowerCase().includes(searchWord.toLowerCase())
+        })
+        if(searchWord === ''){
+            setFilteredData([])
+        } else {
+            setFilteredData(newFilter)
+        }
     }
 
     const clearInput = () => {
@@ -32,15 +42,18 @@ const SearchBar = () => {
             <input
             name='search'
             type='text'
-            placeholder='Search'
+            placeholder='Search | anywhere | any week'
             className='searchInputs'
             value={wordEntered}
             onChange={handleFilter}
             />
         </div>
-        {/* <div className='search-button'> */}
-            <img id='search-icon' src={search}></img>
-        {/* </div> */}
+        <div className='search-button'>
+            {/* <img id='search-icon' src={search}></img> */}
+            <span class="material-symbols-outlined searchbaricon">
+search
+</span>
+        </div>
         </div>
         <div className='searchall'>
             {filteredData.length !== 0 && (
@@ -49,12 +62,12 @@ const SearchBar = () => {
                         return <div className='res-row'>
                                 <NavLink className='data-item'
                                 key={value.id}
-                                to={`videos/${value.id}`}
+                                to='/'
                                 onClick={clearInput}
                                 >
                                     <div id='sb-space'></div>
                          <img id='search-res-pic' src={search}></img>
-                         <p id='search-res-text'>{value.title}</p>
+                         <p id='search-res-text'>{value.city}</p>
                         </NavLink>
                             </div>
                     })
