@@ -20,7 +20,7 @@
 
 .spotCard-box{
     cursor: pointer;
-    width: 350px;
+    width: 290px;
     height: 360px;
     margin: 15px;
 }
@@ -43,4 +43,9 @@
 .spc-info-left{
     display: flex;
     flex-direction: column;
+}
+#spot-country{
+    color: #757271;
+    font-size: 15px;
+    margin: 5px 0px;
 }

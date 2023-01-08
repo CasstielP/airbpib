@@ -11,9 +11,9 @@ const SpotCard = ({ spot }) => {
         <div className="spotcard-content">
           <div className="spc-info-left">
             <div className="bold">
-              {spot.city}, {spot.country}
+              {spot.city}, {spot.state}
             </div>
-            {/* <div>{spot.name}</div> */}
+            <div id='spot-country'>{spot.country}</div>
             <div></div>
             <div>
               <span className="bold">${spot.price}</span> night

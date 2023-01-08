@@ -162,7 +162,9 @@ const SpotDetail = () => {
             <div id='aircovertext'>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</div>
           </div>
           <div className="sig_spot_linebreak-btm"></div>
-
+            <div className="spot_desc">
+              <div>{currentSpot.description}</div>
+            </div>
 
           </div>
 

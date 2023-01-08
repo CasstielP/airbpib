@@ -61,7 +61,7 @@
 
   .spot-linebreak {
     display: flex;
-    background-color: rgb(96, 123, 198, 0.2);
+    background-color: none;
     margin-top: 30px;
     margin-bottom: 30px;
     width: 98%;
@@ -77,7 +77,7 @@
     height: 480px;
     /* width: 100%; */
     width: 372px;
-    margin: 40px 0px 40px 10px;
+    margin: 0px 0px 40px 10px;
     padding: 20px;
   }
 
@@ -302,7 +302,8 @@
   width: 880px;
   height: 1px;
   background-color: #dddddd;
-  margin: 50px 0px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 .spot_badge_info{
   display: flex;
@@ -339,4 +340,7 @@
 }
 .spot-detail{
   margin-top: 0;
+}
+.below-spotImg{
+  margin-top: 40px;
 }
