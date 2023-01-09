@@ -22,7 +22,7 @@ const ReviewPortion = ({spotReviews}) => {
             <div className="single-review">
               <div className="rev_item_head_wrapper">
               <h3>{review?.User?.firstName}</h3>
-              <p className="single-review-stars">
+              <p className="single-review-star">
                 {review.stars} ★
               </p>
               </div>

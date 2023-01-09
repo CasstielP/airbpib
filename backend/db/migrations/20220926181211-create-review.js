@@ -22,7 +22,7 @@ module.exports = {
 
       },
       review: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       stars: {
         type: Sequelize.FLOAT

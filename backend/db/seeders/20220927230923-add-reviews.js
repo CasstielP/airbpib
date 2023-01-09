@@ -7,7 +7,7 @@ module.exports = {
     {
       spotId:1,
       userId:2,
-      review:'good',
+      review:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Morbi blandit cursus risus at ultrices mi tempus imperdiet nulla. A erat nam at lectus urna. Nisl tincidunt eget nullam non nisi est sit amet facilisis.',
       stars: 4
     },
     // {
@@ -19,7 +19,7 @@ module.exports = {
     {
       spotId:2,
       userId:1,
-      review:'excellent',
+      review:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Morbi blandit cursus risus at ultrices mi tempus imperdiet nulla. A erat nam at lectus urna. Nisl tincidunt eget nullam non nisi est sit amet facilisis.',
       stars:5
     },
     // {
@@ -31,7 +31,7 @@ module.exports = {
     {
       spotId:3,
       userId:2,
-      review:'great',
+      review:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Morbi blandit cursus risus at ultrices mi tempus imperdiet nulla. A erat nam at lectus urna. Nisl tincidunt eget nullam non nisi est sit amet facilisis.',
       stars:4.5
     },
     // {
@@ -43,7 +43,7 @@ module.exports = {
     {
       spotId:4,
       userId:2,
-      review:'splendid',
+      review:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Morbi blandit cursus risus at ultrices mi tempus imperdiet nulla. A erat nam at lectus urna. Nisl tincidunt eget nullam non nisi est sit amet facilisis.',
       stars:5
     },
     // {
