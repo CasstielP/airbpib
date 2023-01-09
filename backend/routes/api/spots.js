@@ -89,7 +89,7 @@ router.get("/", validateQueries, async (req, res) => {
   page = parseInt(page);
   size = parseInt(size);
   if (!page) page = 1;
-  if (!size) size = 20;
+  if (!size) size = 36;
   const pagination = {};
   if (page >= 1 && size >= 1) {
     pagination.offset = size * (page - 1);

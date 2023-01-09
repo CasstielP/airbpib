@@ -163,7 +163,7 @@ const SpotDetail = () => {
           </div>
           <div className="sig_spot_linebreak-btm"></div>
             <div className="spot_desc">
-              <div>{currentSpot.description}</div>
+              <div id='spot_desc_text'>{currentSpot.description}</div>
             </div>
 
           </div>

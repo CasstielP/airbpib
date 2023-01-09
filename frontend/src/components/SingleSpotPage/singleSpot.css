@@ -344,3 +344,10 @@
 .below-spotImg{
   margin-top: 40px;
 }
+#spot_desc_text{
+  width: 800px;
+  margin: 20px 0px;
+  font-size: 19px;
+  line-height: 1.3;
+  color: rgb(70, 70, 70);
+}
