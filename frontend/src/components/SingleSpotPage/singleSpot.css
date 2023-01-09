@@ -11,8 +11,13 @@
   }
 
   .singleSpot-Header-detail {
+    display: flex;
+    flex-direction: row;
     margin-top: -14px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    height: 50px;
+    align-items: center;
+
   }
 
   .singleSpot-Header-detail span {
@@ -193,6 +198,7 @@
 #bk-rev-num{
   color: #7e7e7e;
   font-size: 14px;
+  text-decoration: underline;
 }
 #bk-price{
   color: #7e7e7e;
@@ -251,6 +257,9 @@
  border: none;
  border-radius: 10px;
  color: white;
+ cursor: pointer;
+ font-weight: bold;
+ font-size: 16px;
 }
 
 .bk-form{
@@ -355,4 +364,12 @@
 #spot_desc_header{
   font-weight: bold;
   font-size: 24px;
+}
+.underline{
+  text-decoration: underline;
+  margin: 0;
+}
+#header_icon{
+  width: 22px;
+
 }

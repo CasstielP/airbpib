@@ -102,9 +102,10 @@ const SpotDetail = () => {
               ) : (
                 <span>★ New · </span>
               )}
-              <span>{spotReviews.length} reviews · </span>
+              <span className="underline">{spotReviews.length} reviews</span>
+              <img id='header_icon' src={badge}></img><span>Superhost</span>
               <span>
-                {currentSpot.city}, {currentSpot.state}, {currentSpot.country}
+              · {currentSpot.city}, {currentSpot.state}, {currentSpot.country}
               </span>
               {/* <span>Entire Spot hosted by {currentSpot?.Owner?.firstName}  ·  </span> */}
             </div>
@@ -231,13 +232,13 @@ const SpotDetail = () => {
                   <span>
                     {currentSpot.avgRating ? (
                       <span className="bold bk-tr-star">
-                        ★ {currentSpot.avgRating}
+                        ★ {currentSpot.avgRating} ·
                       </span>
                     ) : (
                       <span className="bold bk-tr-star">★ New</span>
                     )}
                   </span>
-                  <span id="bk-rev-num">· {spotReviews.length} reviews</span>
+                  <span id="bk-rev-num">{spotReviews.length} reviews</span>
                 </div>
               </div>
             </div>
@@ -247,6 +248,7 @@ const SpotDetail = () => {
                   <label className="booking-label">CHECK-IN</label>
                   <input
                     type="date"
+                    className="bk_date_input"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                   ></input>
