@@ -66,8 +66,8 @@ const handleCancel = (e) => {
 
 return (
   <div className="ns-container">
-   <div className="ns-header-container">
-    <h2>Host your Spot!</h2>
+   <div className="ns-header-wrapper">
+    <div id="upload_pg_header">Host your Spot!</div>
       <div className="errorList">
           {
           isSubmitted &&

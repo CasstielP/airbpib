@@ -7,8 +7,11 @@
     align-items: center;
   }
 
-  .ns-header-conatiner {
-    margin-bottom: 10px;
+  .ns-header-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .errorList {
@@ -53,10 +56,18 @@
     background: #ff385c;
     color: white;
     font: bold;
+    cursor: pointer;
   }
 
   .submit-button:hover {
     background: white;
     border: 1px #ff385c solid;
     color:#ff385c;
+  }
+  #upload_pg_header{
+    /* margin-left: 25px; */
+    margin: 25px;
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 20px;
   }
