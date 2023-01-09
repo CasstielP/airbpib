@@ -51,6 +51,7 @@ const UserSpots = () => {
                 <div className="bold">
                   {spot.city}, {spot.state}
                 </div>
+            <div id='spot-country'>{spot.country}</div>
                 <div>
                   <span className="bold">${spot.price}</span> night
                 </div>

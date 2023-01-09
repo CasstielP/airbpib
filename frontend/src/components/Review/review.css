@@ -1,6 +1,7 @@
 .single-review {
     font-weight: bolder;
     margin-bottom: 30px;
+    width: 457px;
   }
 
   .single-review h3 {
@@ -28,19 +29,35 @@
 
 
   .rv-submit-button {
-    width: 11%;
-    /* padding: 10px; */
-    margin: 0px 0px 5px -3px;
     size: 50%;
     border: 1px #ff385c solid;
     border-radius: 4px;
     background: #ff385c;
     color: white;
     font: bold;
+    margin-top: 5px;
+    cursor: pointer;
   }
 
   .rv-submit-button:hover {
     background: white;
     border: 1px #ff385c solid;
     color:#ff385c;
+  }
+  #rev_date{
+    color: #9d9891;
+    font-weight: 100;
+  }
+  .rev_content{
+    font-weight: 100;
+  }
+  .rev_item_head_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .usr_rev_head_wrapper{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
   }

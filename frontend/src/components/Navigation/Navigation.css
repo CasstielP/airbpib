@@ -126,7 +126,7 @@
     border-radius: 15px;
     /* top: 83px; */
     position: absolute;
-    height: 220px;
+    max-height: 220px;
     width: 200px;
     z-index: 5000;
     right: 20px;

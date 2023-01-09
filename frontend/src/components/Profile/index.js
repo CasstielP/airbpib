@@ -16,14 +16,14 @@ const ProfilePage = () => {
     return (
 
         <>
-        <h2>Spots Currently Hosting</h2>
+        <h2 className='prp-header'>Spots Currently Hosting</h2>
             {/* <div className='pr-allspots-container'> */}
             <UserSpots />
             {/* </div> */}
             <br></br>
             <br></br>
-        <h2>Your Reviews</h2>
-        <div className="spot-review-container">
+        <h2 className='prp-header'>Your Reviews</h2>
+        <div className="spot-review-container prp">
             <UserReviews />
         </div>
         </>

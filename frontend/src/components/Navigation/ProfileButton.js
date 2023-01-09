@@ -67,9 +67,9 @@ function ProfileButton({ user }) {
 
     <div className='middleline'></div>
 
-    <div className="menu-select">
+    {/* <div className="menu-select">
       <div onClick={()=>history.push('/newspot')}>Host your Spot</div>
-    </div>
+    </div> */}
 
     <div className="menu-select">
       <div onClick={()=>history.push('/user')}>Profile</div>

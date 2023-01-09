@@ -33,15 +33,22 @@ const UserReviews = () => {
           userReviews.map((review) => (
             <div className="single-review">
 
-              <h3>{review.User.firstName}{" "}{review.User.lastName}</h3>
+              {/* <h3>{review.User.firstName}{" "}{review.User.lastName}</h3> */}
+              <div className='usr_rev_head_wrapper'>
+              <div>
               <p className="single-review-stars">
                 {review.stars} ★
               </p>
+              <div id='rev_date'>{(new Date(review.createdAt)).toLocaleDateString() }</div>
               <p className="single-review-content">
-                <span>
+                <span  className="rev_content">
                   "{review.review}"
                 </span>
               </p>
+              </div>
+              <div>
+              </div>
+              </div>
               <div>
                 {
                   review.ReviewImages &&
@@ -50,11 +57,11 @@ const UserReviews = () => {
                       <img
                       className="single-review-image"
                       src={image.url} />
-                    )
-                  })
-                }
+                      )
+                    })
+                  }
               </div>
-              <button className='rv-submit-button' onClick={()=>handleDeleteReview(review.id)} >Delete Review</button>
+                  <button className='rv-submit-button' onClick={()=>handleDeleteReview(review.id)} >Delete Review</button>
             </div>
           ))
         }

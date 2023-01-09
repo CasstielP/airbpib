@@ -20,12 +20,15 @@ const ReviewPortion = ({spotReviews}) => {
         {
           spotReviews.map((review) => (
             <div className="single-review">
-              <h3>{review?.User?.firstName}{" "}{review?.User?.lastName}</h3>
+              <div className="rev_item_head_wrapper">
+              <h3>{review?.User?.firstName}</h3>
               <p className="single-review-stars">
                 {review.stars} ★
               </p>
+              </div>
+              <div id='rev_date'>{(new Date(review.createdAt)).toLocaleDateString() }</div>
               <p className="single-review-content">
-                <span>
+                <span className="rev_content">
                   "{review.review}"
                 </span>
               </p>

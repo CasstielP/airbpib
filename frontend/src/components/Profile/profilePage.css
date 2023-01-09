@@ -7,10 +7,10 @@
 .pr-allspots-container{
     display: flex;
     justify-content: space-around;
-    margin: 140px 100px;
+    margin: 50px 100px;
     flex-direction: row;
     /* flex-flow: row wrap; */
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
 }
 
 
@@ -26,20 +26,43 @@
     font-weight: bold;
 }
 
+.pr_buttons_wrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top: 90px;
+    width: 220px;
+    justify-content: space-between;
+}
+
 .pr-submit-button {
     width: 100px;
     /* padding: 10px; */
-    margin: 0px 0px 5px -3px;
+    /* margin: 0px 0px 5px -3px; */
     size: 50%;
     border: 1px #ff385c solid;
     border-radius: 4px;
     background: #ff385c;
     color: white;
     font: bold;
+    cursor: pointer;
   }
 
   .pr-submit-button:hover {
     background: white;
     border: 1px #ff385c solid;
     color:#ff385c;
+  }
+
+  .spot_header_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .prp-header{
+    margin-left: 120px;
+  }
+
+  .prp{
+    margin: 0px 120px;
+    margin-bottom: 200px;
   }
