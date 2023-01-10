@@ -71,7 +71,7 @@ export const fetchSpots = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots');
     if(response.ok) {
         const spots = await response.json();
-        console.log('spotsspotsspotsspotsspots', spots)
+        // console.log('spotsspotsspotsspotsspots', spots)
         dispatch(loadSpots(spots))
         return spots;
     }

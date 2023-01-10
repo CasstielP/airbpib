@@ -82,3 +82,19 @@
     flex-direction: row;
 
   }
+.bk_info_prev_img{
+  width: 270px;
+  border-radius: 20px;
+  /* height: 256px; */
+}
+.pr_bk_wrapper{
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+.pr_bk_card{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
