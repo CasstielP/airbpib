@@ -46,7 +46,7 @@ const CreateReview = ({ spotId, setShowModal }) => {
   };
 
   return (
-    <div>
+    <div className="create_review_modal_container">
       <div className="review-modal-subheader">hope you had a pleasant stay</div>
 
       <div className="errorList">
@@ -56,7 +56,7 @@ const CreateReview = ({ spotId, setShowModal }) => {
       </div>
 
       <form onSubmit={handleReviewSubmit}>
-        <div>
+        <div className="create_review_content">
           <label className="review-rating">
             Rating:&nbsp;
             <select
@@ -81,7 +81,7 @@ const CreateReview = ({ spotId, setShowModal }) => {
           <div className="form-input-break"></div>
         </div>
 
-        <button className="create-review-button">Create Review</button>
+        <button className="cr-modal">Create Review</button>
       </form>
     </div>
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as spotActions from "../../store/spot";
 import {getOneSpot} from '../../store/spot'
-
+import './editSpot.css'
 function EditSpotPage() {
   const dispatch = useDispatch();
   const {spotId} = useParams();
@@ -78,7 +78,7 @@ function EditSpotPage() {
   return (
   <div className="ns-container">
     <div className="ns-header-container">
-      <h3>Edit Your Spot</h3>
+      <h3 className="edit_spot_header">Edit Your Spot</h3>
       <div className="errorList">
           {
             isSubmitted &&

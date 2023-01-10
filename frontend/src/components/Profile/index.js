@@ -5,6 +5,7 @@ import UserReviews from '../Review/userReview';
 // import UserSpots from '../SpotList/userSpotPage';
 import UserSpots from '../UserSpots'
 import './profilePage.css'
+import UserBookings from './userBooking';
 const ProfilePage = () => {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -16,12 +17,15 @@ const ProfilePage = () => {
     return (
 
         <>
-        <h2 className='prp-header'>Spots Currently Hosting</h2>
+        <UserBookings />
+        <h2 className='prp-header' id='prph'>Spots Currently Hosting</h2>
             {/* <div className='pr-allspots-container'> */}
             <UserSpots />
             {/* </div> */}
-            <br></br>
-            <br></br>
+        <br></br>
+        <div className='pr-linebreak-wrapper'>
+        <div className='pr-linebreak'></div>
+        </div>
         <h2 className='prp-header'>Your Reviews</h2>
         <div className="spot-review-container prp">
             <UserReviews />

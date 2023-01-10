@@ -482,10 +482,10 @@ router.get("/:spotId/reviews", async (req, res) => {
 const validateDates = [
   check("endDate")
     .custom(
-      (endate, { req }) =>
+      (enDate, { req }) =>
         new Date(req.body.endDate) > new Date(req.body.startDate)
     )
-    .withMessage("endDate cannot be on or before startDate"),
+    .withMessage("end Date cannot be on or before start Date"),
   handleValidationErrors,
 ];
 
@@ -512,6 +512,21 @@ router.post(
       });
     }
 
+    // if(new Date(req.body.endDate) > new Date(req.body.startDate)) {
+    //   console.log(new Date(req.body.endDate))
+    //   console.log(new Date(req.body.startDate))
+
+    //   res.status(400);
+    //   res.json({
+    //     message:
+    //       "end date cannot be on or before start date",
+    //     statusCode: 400,
+    //     errors: {
+    //       endDate: "end date cannot be on or before start date",
+    //     },
+    //   })
+    // }
+
     const allspotBookings = await Booking.findAll({
       where: {
         spotId: req.params.spotId,
@@ -537,6 +552,7 @@ router.post(
             endDate: "End date conflicts with an existing booking",
           },
         });
+
 
         if (
           new Date(req.body.startDate) >= bookingStartDate &&

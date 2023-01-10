@@ -36,7 +36,6 @@ const SpotDetail = () => {
   const [bkPrice, setBkPrice] = useState(0);
 
   let days = (new Date(endDate) - new Date(startDate)) / 1000 / 60 / 60 / 24;
-  console.log("daysNunmdaysNunmdaysNunmdaysNunmdaysNunm", days);
   let totalPrice = 0;
   let cleaningFee = 125;
   let serviceFee = 200;
@@ -82,6 +81,7 @@ const SpotDetail = () => {
           const data = await res.json();
           if (data.statusCode >= 400) {
             setErrors([data.message]);
+            console.log('datatatatatatata', data)
           }
         }
       );

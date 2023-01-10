@@ -7,7 +7,7 @@
 .pr-allspots-container{
     display: flex;
     justify-content: space-around;
-    margin: 50px 100px;
+    margin: 50px 100px 0px 100px;
     flex-direction: row;
     /* flex-flow: row wrap; */
     flex-wrap: wrap;
@@ -65,4 +65,20 @@
   .prp{
     margin: 0px 120px;
     margin-bottom: 200px;
+  }
+  #prph{
+    margin-top: 40px;
+    margin-left: 140px;
+  }
+  .pr-linebreak{
+    flex-direction: row;
+    background-color: #ecf0f8;
+    height: 2px;
+    width: 1200px;
+    margin: 20px 120px;
+  }
+  .pr-linebreak-wrapper{
+    display: flex;
+    flex-direction: row;
+
   }

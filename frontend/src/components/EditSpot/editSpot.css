@@ -1,0 +1,8 @@
+.ns-header-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.edit_spot_header{
+    margin-top: 60px;
+}

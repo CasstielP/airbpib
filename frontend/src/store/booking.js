@@ -53,7 +53,7 @@ export const fetchAllBookings = (spotId) => async (dispatch) => {
     }
 }
 
-export const fetchUserBookings = () =>async(dispatch)=> {
+export const fetchUserBookings = () => async (dispatch) => {
     const res = await csrfFetch(`/api/bookings/current`)
     if (res.ok) {
         const userBookings = await res.json()
@@ -123,7 +123,7 @@ const bookingReducer = (state=initialState, action)=> {
 
         case LOAD_USER_BOOKINGS:
         newState = {...state, userBookings:{}}
-        action.bookings.Bookings.forEach((booking)=> newState.allBookings[booking.id] = booking)
+        action.bookings.Bookings.forEach((booking)=> newState.userBookings[booking.id] = booking)
         return newState
 
         case CREATE_BOOKING:

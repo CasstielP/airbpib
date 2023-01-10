@@ -7,3 +7,21 @@
     align-items: center;
     justify-content: center;
   }
+.create_review_modal_container{
+  width: 400px;
+
+}
+.create_review_content{
+  margin: 0px 20px;
+}
+.cr-modal{
+  cursor: pointer;
+  width: 115px;
+  margin-left: 20px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: #ff385c;
+  border: 1px #ff385c solid;
+  font: bold;
+  color: white;
+}
