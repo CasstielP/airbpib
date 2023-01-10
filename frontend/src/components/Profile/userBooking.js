@@ -4,20 +4,23 @@ import { useEffect } from "react";
 import * as bookingActions from '../../store/booking'
 const UserBookings = () => {
     const dispatch = useDispatch()
-    const userBookings = useSelector(state=>Object.values(state.booking.userBookings))
-
+    const bookings = useSelector(state=>state.booking.userBookings)
+    const userBookingsArr = Object.values(bookings)
     useEffect(()=> {
         dispatch(bookingActions.fetchUserBookings())
     }, [])
+    console.log(userBookingsArr[0])
 
     return (
         <>
         <div>
             <h2>Current Bookings</h2>
             {
-                userBookings.map((booking)=>(
-                    <div>booking.Spot.</div>
-                ))
+                 userBookingsArr.map((booking)=>
+                 <>
+                 <div>{booking}</div>
+                 </>
+                 )
             }
         </div>
         </>
