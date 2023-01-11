@@ -5,7 +5,7 @@ import UserReviews from '../Review/userReview';
 // import UserSpots from '../SpotList/userSpotPage';
 import UserSpots from '../UserSpots'
 import './profilePage.css'
-import UserBookings from './userBooking';
+// import UserBookings from './userBooking';
 const ProfilePage = () => {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -17,7 +17,7 @@ const ProfilePage = () => {
     return (
 
         <>
-        <UserBookings />
+        {/* <UserBookings /> */}
         <h2 className='prp-header' id='prph'>Spots Currently Hosting</h2>
             {/* <div className='pr-allspots-container'> */}
             <UserSpots />

@@ -19,7 +19,7 @@ const SpotCard = ({ spot }) => {
               <span className="bold">${spot.price}</span> night
             </div>
           </div>
-            <div>
+            <div id='spotCard_star'>
             {spot.avgRating ? (
               <span>★{spot.avgRating}</span>
             ) : (
