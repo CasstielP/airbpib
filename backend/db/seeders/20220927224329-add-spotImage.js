@@ -247,22 +247,22 @@ module.exports = {
       },
       {
         spotId: 10,
-        url: 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-32844842/original/a0e30a8e-2cef-4037-9fec-eecf490aad69.jpeg?im_w=1440',
+        url: 'https://cis3110fall2021pi.s3.us-west-1.amazonaws.com/yuccavalley1.png',
         preview: true
       },
       {
         spotId: 10,
-        url: 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-32844842/original/18457ca3-54ad-4577-99a9-530c58de21d9.jpeg?im_w=1440',
+        url: 'https://cis3110fall2021pi.s3.us-west-1.amazonaws.com/yuccavalley2.png',
         preview: true
       },
       {
         spotId: 10,
-        url: 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-32844842/original/b4ee1818-a17a-419f-9659-72cf7b9f95bb.jpeg?im_w=1440',
+        url: 'https://cis3110fall2021pi.s3.us-west-1.amazonaws.com/yuccavalley3.png',
         preview: true
       },
       {
         spotId: 10,
-        url: 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-32844842/original/aa59b24a-599b-46ca-b839-c4fed2c34fd4.jpeg?im_w=1440',
+        url: 'https://cis3110fall2021pi.s3.us-west-1.amazonaws.com/yuccavalley4.png',
         preview: true
       },
       {
