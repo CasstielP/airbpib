@@ -34,6 +34,7 @@ const SpotDetail = () => {
   const [guestNum, setGuestNum] = useState(1);
   const [errors, setErrors] = useState([]);
   const [bkPrice, setBkPrice] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false)
 
   let days = (new Date(endDate) - new Date(startDate)) / 1000 / 60 / 60 / 24;
   let totalPrice = 0;
@@ -61,6 +62,7 @@ const SpotDetail = () => {
   };
 
   useEffect(() => {
+    setIsLoaded(true)
     dispatch(getOneSpot(spotId));
     dispatch(reviewActions.loadAllReviews(spotId));
     dispatch(bookingActions.fetchAllBookings(spotId));
@@ -90,6 +92,7 @@ const SpotDetail = () => {
 
   return (
     <>
+    { isLoaded &&
       <div className="singleSpot-Container">
         <div className="spot_header_wrapper">
           <div className="singleSpot-Header">
@@ -327,6 +330,7 @@ const SpotDetail = () => {
           <ReviewPortion spotReviews={spotReviews} />
         </div>
       </div>
+    }
     </>
   );
 };

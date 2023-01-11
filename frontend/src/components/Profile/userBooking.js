@@ -2,7 +2,7 @@ import { NavLink, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import * as bookingActions from '../../store/booking'
-import PrUserBookings from "./userBookings";
+// import PrUserBookings from "./userBookings";
 const UserBookings = () => {
     const dispatch = useDispatch()
     const bookings = useSelector(state=>state.booking.userBookings)
@@ -21,10 +21,10 @@ const UserBookings = () => {
                  (
                     <>
                         <div className="pr_bk_card">
+                        <div>{booking.Spot.id}</div>
                         <img className="bk_info_prev_img" src={booking.Spot.SpotImages[0].url}></img>
                         <div>{booking.Spot.city}</div>
                         <div>{new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}</div>
-                        {/* <div>{booking.Spot}</div> */}
                         </div>
                     </>
                  ))

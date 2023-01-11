@@ -31,12 +31,9 @@ router.get("/current", requireAuth, async (req, res) => {
       include: {
         model: SpotImage
       },
-      // model: User
     },
-    // include: {
-    //   model: SpotImage
-    // }
   });
+
   res.json({
     Bookings: bookings,
   });

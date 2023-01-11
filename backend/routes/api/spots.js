@@ -491,7 +491,7 @@ const validateDates = [
 
 router.post(
   "/:spotId/bookings",
-  validateDates,
+  // validateDates,
   requireAuth,
   async (req, res) => {
     const { startDate, endDate } = req.body;
@@ -512,26 +512,24 @@ router.post(
       });
     }
 
-    // if(new Date(req.body.endDate) > new Date(req.body.startDate)) {
-    //   console.log(new Date(req.body.endDate))
-    //   console.log(new Date(req.body.startDate))
-
-    //   res.status(400);
-    //   res.json({
-    //     message:
-    //       "end date cannot be on or before start date",
-    //     statusCode: 400,
-    //     errors: {
-    //       endDate: "end date cannot be on or before start date",
-    //     },
-    //   })
-    // }
 
     const allspotBookings = await Booking.findAll({
       where: {
         spotId: req.params.spotId,
       },
     });
+
+    if(new Date(req.body.endDate) < new Date(req.body.startDate)) {
+      res.status(403);
+      res.json({
+        message:
+          "end date cannot be on or before start date",
+        statusCode: 403,
+        errors: {
+          endDate: "end date cannot be on or before start date",
+        },
+      })
+    }
 
     for (let i = 0; i < allspotBookings.length; i++) {
       let bookingStartDate = allspotBookings[i].dataValues.startDate;
