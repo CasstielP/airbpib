@@ -98,3 +98,16 @@
   flex-direction: column;
   margin-bottom: 10px;
 }
+.pr_bk_content{
+  margin: 0px 10px;
+}
+.pr_bk_info{
+  margin-top: 5px;
+}
+#pr_bk_content_city{
+  font-weight: bold;
+}
+#pr_bk_content_dates{
+  font-size: 14px;
+  color: #88827d;
+}

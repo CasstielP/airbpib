@@ -33,7 +33,19 @@ router.get("/current", requireAuth, async (req, res) => {
       },
     },
   });
+  // for (let i=0; i<bookings.length; i++) {
+  //     let owner = await User.findByPk({
+  //       where: {
+  //         id: bookings[i].Spot.ownerId,
+  //       },
+  //     })
+  //     if(owner) {
+  //       bookings[i].dataValues.Spot.dataValues.owner = owner.firstName
+  //     } else{
+  //       bookings[i].dataValues.Spot.dataValues.owner = null
 
+  //     }
+  // }
   res.json({
     Bookings: bookings,
   });

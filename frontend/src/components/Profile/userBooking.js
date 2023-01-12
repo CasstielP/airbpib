@@ -21,10 +21,11 @@ const UserBookings = () => {
                  (
                     <>
                         <div className="pr_bk_card">
-                        <div>{booking.Spot.id}</div>
                         <img className="bk_info_prev_img" src={booking.Spot.SpotImages[0].url}></img>
-                        <div>{booking.Spot.city}</div>
-                        <div>{new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}</div>
+                        <div className='pr_bk_info'>
+                        <div className='pr_bk_content'id='pr_bk_content_city'>{booking.Spot.city}</div>
+                        <div className='pr_bk_content' id='pr_bk_content_dates'>{new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}</div>
+                        </div>
                         </div>
                     </>
                  ))
