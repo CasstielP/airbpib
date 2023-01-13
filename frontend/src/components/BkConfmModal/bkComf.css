@@ -1,0 +1,17 @@
+.bk_confirmation_wrapper{
+    margin: 50px 20px;
+    text-align: center;
+}
+#confirmation_text{
+    font-weight: bold;
+}
+.bk_modal_footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+#bk_modal_aircover{
+
+}

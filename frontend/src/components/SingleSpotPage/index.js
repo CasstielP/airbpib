@@ -15,6 +15,7 @@ import countertop from "./countertops.png";
 import badge from "./badge.png";
 import key from "./key.png";
 import aircover from "./aircover.png";
+import BkComfirmationModal from "../BkConfmModal";
 
 const SpotDetail = () => {
   const { spotId } = useParams();
@@ -35,6 +36,7 @@ const SpotDetail = () => {
   const [errors, setErrors] = useState([]);
   const [bkPrice, setBkPrice] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false)
+
 
   let days = (new Date(endDate) - new Date(startDate)) / 1000 / 60 / 60 / 24;
   let totalPrice = 0;
@@ -71,6 +73,11 @@ const SpotDetail = () => {
   const handleBooking = (e) => {
     e.preventDefault();
     let Errors = [];
+    setErrors([])
+    if(!currentUser) {
+      setErrors(['You must be Logged in first'])
+      return
+    }
     if (!startDate || !endDate) {
       setErrors(["Must enter valid dates"]);
     } else {
@@ -93,6 +100,8 @@ const SpotDetail = () => {
   return (
     <>
     { isLoaded &&
+    <>
+
       <div className="singleSpot-Container">
         <div className="spot_header_wrapper">
           <div className="singleSpot-Header">
@@ -330,6 +339,9 @@ const SpotDetail = () => {
           <ReviewPortion spotReviews={spotReviews} />
         </div>
       </div>
+      <BkComfirmationModal />
+    </>
+
     }
     </>
   );
