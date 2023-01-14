@@ -4,18 +4,29 @@ import {useHistory} from 'react-router-dom'
 import './bkComf.css'
 import aircover from '../SingleSpotPage/aircover.png'
 import check from './check.png'
-const BookingConfirmation = () => {
+import superhost from '../SingleSpotPage/badge.png'
+const BookingConfirmation = ({setShowBkConfirmation}) => {
 
 
     return (
         <>
-        <div>
+        <div className="bk_conf_container">
         <div className="bk_confirmation_wrapper">
+            <div className="conf_header">
             <div id='confirmation_text'>Your Booking is Confirmed!</div>
-            <div>
+            <div className="bk_conf_linebreak"></div>
+            </div>
+            <div className="badges_wrapper">
                 <div className="bk_modal_footer">
                     <img  id ='bk_modal_aircover'src={aircover}/>
-                    <img id ='check'src={check}/>
+                    <img className="check"src={check}/>
+                </div>
+                <div className="bk_modal_footer" id='bkMtxt'>
+                    <div className="bk_modal_footer_col">
+                    <img id='bk_modal_superhost' src={superhost} />
+                    <div className="bk_modal_txt">Superhost</div>
+                    </div>
+                    <img className="check" src={check} />
                 </div>
             </div>
         </div>
