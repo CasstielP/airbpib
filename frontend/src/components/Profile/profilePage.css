@@ -89,20 +89,26 @@
 }
 .pr_bk_wrapper{
   display: flex;
-  flex-direction: row;
-  flex-flow: row wrap;
+  flex-direction: column;
   justify-content: space-evenly;
+  align-items: flex-start;
+  margin-left: 550px;
 }
 .pr_bk_card{
   display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+  flex-direction: row;
+  margin-bottom: 30px;
+  box-shadow: #ecf0f8 1px 1px 5px 1px;
+  border-radius: 20px;
+  width: 800px;
+  justify-content: space-between;
 }
 .pr_bk_content{
   margin: 0px 10px;
 }
 .pr_bk_info{
   margin-top: 5px;
+  /* margin-left: 80px; */
 }
 #pr_bk_content_city{
   font-weight: bold;
@@ -110,4 +116,7 @@
 #pr_bk_content_dates{
   font-size: 14px;
   color: #88827d;
+}
+#cur_bk_header{
+  margin-left: 140px;
 }
