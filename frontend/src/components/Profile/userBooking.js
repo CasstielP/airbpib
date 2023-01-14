@@ -21,12 +21,15 @@ const UserBookings = () => {
             <div className="pr_bk_card">
             <div className="pr_bk_info">
                 <div className="pr_bk_content" id="pr_bk_content_city">
-                  {booking.Spot.city}
+                 {booking.Spot.city}
                 </div>
+                <div className="pr_bk_content" >{booking.Spot.name}</div>
+                <div className="pr_bk_content">{booking.Spot.address}, {booking.Spot.state} {booking.Spot.country}</div>
                 <div className="pr_bk_content" id="pr_bk_content_dates">
                   {new Date(booking.startDate).toLocaleDateString()} -{" "}
                   {new Date(booking.endDate).toLocaleDateString()}
                 </div>
+                <div className="pr_bk_content">Price Per Night: ${booking.Spot.price}</div>
               </div>
               <img
                 className="bk_info_prev_img"
