@@ -12,10 +12,6 @@ const BkComfirmationModal = ({showBkConfirmation, setShowBkConfirmation}) => {
             onClose={()=> setShowBkConfirmation(false)}
         >
             <BookingConfirmation setShowBkConfirmation={setShowBkConfirmation} />
-
-
-
-
         </Modal>
 
         }
