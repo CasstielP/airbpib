@@ -122,7 +122,21 @@
   font-size: 14px;
   color: #88827d;
 }
-#cur_bk_header{
+.cur_bk_header{
   margin-top: 60px;
   margin-left: 550px;
+}
+/* #cur_bk_0header{
+  margin-left: 140px;
+} */
+#pr_bk_linebreak{
+  height: 1.8px;
+  background-color: #eaeef7;
+  width: 100%;
+}
+.cur_bk_none{
+  display: flex;
+  flex-direction: column;
+  margin: 0px 140px;
+  width: 1500px;
 }
