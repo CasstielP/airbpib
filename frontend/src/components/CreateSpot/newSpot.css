@@ -76,12 +76,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80px;
+    width: 350px;
+    height: 150px;
   }
+.cr_spt_modal_header{
+  font-weight: bold;
+  font-size: 16px;
+}
 .cr_spt_modal_wrapper{
-  box-shadow: grey 1px 1px 3px;
-  border: none;
-  height: 50px;
-  width: 250px;
+  border: #eaeef7 1px solid;
+  width: 330px;
+  height: 130px;
+  border-radius: 10px;
+  display: flex;
+  box-shadow: #eaeef7 1px 1px 3px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
+}
+.cr_spt_linebreak{
+  height: 1.4px;
+  background-color: #eaeef7;
+  margin-top: 5px;
 }

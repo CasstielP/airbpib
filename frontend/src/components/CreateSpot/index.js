@@ -20,7 +20,7 @@ function CreateSpotFormPage() {
     const [errors, setErrors] = useState([]);
     const history = useHistory()
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [showCrtSpotModal, setShowCrtSpotModal] = useState(true)
+    const [showCrtSpotModal, setShowCrtSpotModal] = useState(false)
 const handleSubmit = (e)  => {
     e.preventDefault();
     setErrors([]);
@@ -52,7 +52,8 @@ const handleSubmit = (e)  => {
     dispatch(spotActions.createSpot(payload))
         .then((response)=> {
           dispatch(spotActions.createSpotImage(imageData, response.id))
-          alert('Sccessully Created New Spot')
+          // alert('Sccessully Created New Spot')
+          setShowCrtSpotModal(true)
         })
         .then(()=>{
             history.push('/')

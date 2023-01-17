@@ -14,7 +14,10 @@ const CreateSpotModal = ({showCrtSpotModal, setShowCrtSpotModal}) => {
                 <div className='cr_spt_modal_container'>
                     <div className='cr_spt_modal_wrapper'>
                         <div>
+                        <div className='cr_spt_modal_header'>
                         Thank you for hosting your spot!
+                        </div>
+                      <div className='cr_spt_linebreak'></div>
                         </div>
                     </div>
                 </div>
