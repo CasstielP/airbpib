@@ -44,7 +44,7 @@ const UserBookings = () => {
       </div>
       </>:<>
       <div className="cur_bk_none">
-      <h2 id='cur_bk_0header'>Current has no Bookings</h2>
+      <h2 id='cur_bk_0header'>Currently has no Bookings</h2>
       <div id='pr_bk_linebreak'></div>
       </div>
       </>
