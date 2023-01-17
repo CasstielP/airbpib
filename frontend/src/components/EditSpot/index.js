@@ -4,6 +4,7 @@ import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as spotActions from "../../store/spot";
 import {getOneSpot} from '../../store/spot'
 import './editSpot.css'
+import EditSpotConfirmationModal from "./editSpotComfirModal";
 function EditSpotPage() {
   const dispatch = useDispatch();
   const {spotId} = useParams();
@@ -23,6 +24,8 @@ function EditSpotPage() {
   const [price, setPrice] = useState('');
   const [errors, setErrors] = useState([]);
   const history = useHistory();
+  const [showEditSptModal, setShowEditSptModal] = useState(true)
+
 
   useEffect(() => {
     if(currentSpot){
@@ -69,14 +72,14 @@ function EditSpotPage() {
 
     dispatch(spotActions.editSpotThunk(editSpot, spotId))
     .then(()=>{
-        alert('Sccessully Edited Spot')
-        history.push('/user')
+        setShowEditSptModal(true)
       })
   }
 
 
   return (
-  <div className="ns-container">
+    <>
+      <div className="ns-container">
     <div className="ns-header-container">
       <h3 className="edit_spot_header">Edit Your Spot</h3>
       <div className="errorList">
@@ -172,6 +175,8 @@ function EditSpotPage() {
       </div>
       </div>
       </div>
+      <EditSpotConfirmationModal showEditSptModal={showEditSptModal} setShowEditSptModal={setShowEditSptModal}/>
+    </>
   );
 }
 

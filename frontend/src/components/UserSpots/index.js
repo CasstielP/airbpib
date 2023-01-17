@@ -21,14 +21,14 @@ const UserSpots = () => {
 
   if (!user) return <Redirect to="/" />;
 
-  const handleDeleteSpot = (spotId) => {
-    if (window.confirm("are you sure you want to delete this spot?")) {
-      dispatch(spotActions.deleteSpotThunk(spotId)).then(() => {
-        history.push("/user");
-        alert("Spot Deleted Successfully!");
-      });
-    }
-  };
+  // const handleDeleteSpot = (spotId) => {
+  //   if (window.confirm("are you sure you want to delete this spot?")) {
+  //     dispatch(spotActions.deleteSpotThunk(spotId)).then(() => {
+  //       history.push("/user");
+  //       alert("Spot Deleted Successfully!");
+  //     });
+  //   }
+  // };
 
   // const handleEditSpotOnclick = async (spotId) => {
   //     // dispatch(spotActions.getOneSpot(spotId))
