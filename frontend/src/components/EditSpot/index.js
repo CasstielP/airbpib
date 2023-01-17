@@ -8,9 +8,7 @@ import EditSpotConfirmationModal from "./editSpotComfirModal";
 function EditSpotPage() {
   const dispatch = useDispatch();
   const {spotId} = useParams();
-  // console.log(spotId)
   const currentSpot = useSelector(state=>state.spot.singleSpot)
-  console.log(currentSpot)
   const currentSpotOwner = useSelector((state)=> state.session.user)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [address, setAddress] = useState('');
@@ -24,7 +22,7 @@ function EditSpotPage() {
   const [price, setPrice] = useState('');
   const [errors, setErrors] = useState([]);
   const history = useHistory();
-  const [showEditSptModal, setShowEditSptModal] = useState(true)
+  const [showEditSptModal, setShowEditSptModal] = useState(false)
 
 
   useEffect(() => {
@@ -56,7 +54,9 @@ function EditSpotPage() {
     if (!description.length) Errors.push("please enter a valid description")
     if (!price || price <=0) Errors.push("please enter a valid price")
     setErrors(Errors)
-
+    if (Errors.length>0) {
+      return
+    }
 
     const editSpot = {
       address,

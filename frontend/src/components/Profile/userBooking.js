@@ -10,13 +10,12 @@ const UserBookings = () => {
   useEffect(() => {
     dispatch(bookingActions.fetchUserBookings());
   }, []);
-  console.log(bkArr[0]);
+
 
   return (
     <>
     {
-      bookings.length > 0?
-      <>
+      bkArr.length > 0?<>
       <h2 className='cur_bk_header'>Current Bookings</h2>
       <div className="pr_bk_wrapper">
         {bkArr.map((booking) => (
@@ -43,9 +42,7 @@ const UserBookings = () => {
           </>
         ))}
       </div>
-      </>
-      :
-      <>
+      </>:<>
       <div className="cur_bk_none">
       <h2 id='cur_bk_0header'>Current has no Bookings</h2>
       <div id='pr_bk_linebreak'></div>
