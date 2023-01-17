@@ -167,6 +167,7 @@
 }
 .search-wrapper{
   display: flex;
+
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -175,6 +176,7 @@
   width: 360px;
   height: 45px;
   box-shadow:  1px 1px 3px rgb(227, 227, 227);
+
 }
 .searchInputs{
   margin-left: 10px;

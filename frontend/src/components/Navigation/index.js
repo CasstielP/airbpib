@@ -41,12 +41,15 @@ function Navigation() {
         <SearchBar />
 
         <div className="nav-right">
+          {
+            sessionUser &&
           <NavLink
           style={{ textDecoration: "none", color: "black" }}
           to='/newspot'
           >
           <div id='host-home'>Airbnb your home</div>
           </NavLink>
+          }
 
           <div className="sessionlink">{sessionLinks}</div>
         </div>

@@ -11,7 +11,13 @@ const CreateSpotModal = ({showCrtSpotModal, setShowCrtSpotModal}) => {
             <Modal
             onClose={()=> setShowCrtSpotModal(false)}
             >
-
+                <div className='cr_spt_modal_container'>
+                    <div className='cr_spt_modal_wrapper'>
+                        <div>
+                        Thank you for hosting your spot!
+                        </div>
+                    </div>
+                </div>
             </Modal>
         }
         </>
