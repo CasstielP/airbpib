@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as spotActions from "../../store/spot";
+import CreateSpotModal from "./CreateSpotModal";
 import './newSpot.css'
 function CreateSpotFormPage() {
     const dispatch = useDispatch()
@@ -19,7 +20,7 @@ function CreateSpotFormPage() {
     const [errors, setErrors] = useState([]);
     const history = useHistory()
     const [isSubmitted, setIsSubmitted] = useState(false)
-
+    const [showCrtSpotModal, setShowCrtSpotModal] = useState(false)
 const handleSubmit = (e)  => {
     e.preventDefault();
     setErrors([]);
@@ -54,7 +55,6 @@ const handleSubmit = (e)  => {
           alert('Sccessully Created New Spot')
         })
         .then(()=>{
-
             history.push('/')
           })
 }
@@ -65,6 +65,7 @@ const handleCancel = (e) => {
 }
 
 return (
+  <>
   <div className="ns-container">
    <div className="ns-header-wrapper">
     <div id="upload_pg_header">Host your Spot!</div>
@@ -173,6 +174,8 @@ return (
     </div>
     </div>
     </div>
+    <CreateSpotModal showCrtSpotModal={showCrtSpotModal} setShowCrtSpotModal={setShowCrtSpotModal} />
+  </>
 )
 }
 
