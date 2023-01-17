@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import * as reviewActions from '../../store/review'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './review.css'
+import UserReviewModal from './userReviewModal'
 
 
 
@@ -10,17 +11,22 @@ const UserReviews = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const userReviews = useSelector(state=> Object.values(state.review.userReviews))
+    const [showEditReviewModal, setShowEditReviewModal] = useState(false)
+    const [showEditRevConfir, setShowEditRevConfir] = useState(false)
 
+    const editRevModalObj = {
+      showEditReviewModal,
+      setShowEditReviewModal,
+      showEditRevConfir,
+      setShowEditRevConfir
+    }
 
     useEffect(() => {
         dispatch(reviewActions.getUserReviews())
     }, [])
 
     const handleDeleteReview = (reviewId) => {
-        if (window.confirm('are you sure to delete this review?')) {
-            dispatch(reviewActions.deleteReviewThunk(reviewId))
-            alert('Review Successully Deleted')
-        }
+      setShowEditReviewModal(true)
     }
 
 
@@ -31,6 +37,7 @@ const UserReviews = () => {
         {/* <h2>Your Reivews</h2> */}
         {
           userReviews.map((review) => (
+            <>
             <div className="single-review">
 
               {/* <h3>{review.User.firstName}{" "}{review.User.lastName}</h3> */}
@@ -63,6 +70,9 @@ const UserReviews = () => {
               </div>
                   <button className='rv-submit-button' onClick={()=>handleDeleteReview(review.id)} >Delete Review</button>
             </div>
+            <UserReviewModal editRevModalObj={editRevModalObj} reviewId={review.id}/>
+            </>
+
           ))
         }
         </>
