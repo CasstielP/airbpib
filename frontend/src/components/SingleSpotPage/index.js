@@ -16,6 +16,7 @@ import badge from "./badge.png";
 import key from "./key.png";
 import aircover from "./aircover.png";
 import BkComfirmationModal from "../BkConfmModal";
+import DeleteSpotModal from "../DeleteSpot/DeleteSpotModal";
 
 const SpotDetail = () => {
   const { spotId } = useParams();
@@ -37,7 +38,20 @@ const SpotDetail = () => {
   const [bkPrice, setBkPrice] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showBkConfirmation, setShowBkConfirmation] = useState(false);
+  const [showDeleteSpotModal, setShowDeleteSpotModal] = useState(false)
+  const [showdltSpotError, setShowDltSpotError] = useState(false)
+  const [showDltConfirmation, setShowDltConfirmation] = useState(false)
 
+
+  let deleteSpotObj = {
+     showDeleteSpotModal,
+    setShowDeleteSpotModal,
+    showdltSpotError,
+    setShowDltSpotError,
+    showDltConfirmation,
+    setShowDltConfirmation,
+    spotId
+  }
   let days = (new Date(endDate) - new Date(startDate)) / 1000 / 60 / 60 / 24;
   let totalPrice = 0;
   let cleaningFee = 125;
@@ -55,12 +69,13 @@ const SpotDetail = () => {
   };
 
   const handleDeleteSpot = () => {
-    if (window.confirm("are you sure you want to delete this spot?")) {
-      dispatch(spotActions.deleteSpotThunk(spotId)).then(() => {
-        history.push("/user");
-        alert("Spot Deleted Successfully!");
-      });
-    }
+    // if (window.confirm("are you sure you want to delete this spot?")) {
+    //   dispatch(spotActions.deleteSpotThunk(spotId)).then(() => {
+    //     history.push("/user");
+    //     alert("Spot Deleted Successfully!");
+    //   });
+    // }
+    setShowDeleteSpotModal(true)
   };
 
   useEffect(() => {
@@ -358,6 +373,7 @@ const SpotDetail = () => {
             showBkConfirmation={showBkConfirmation}
             setShowBkConfirmation={setShowBkConfirmation}
           />
+          <DeleteSpotModal deleteSpotObj={deleteSpotObj} />
         </>
       )}
     </>
