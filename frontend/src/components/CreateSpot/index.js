@@ -20,7 +20,7 @@ function CreateSpotFormPage() {
     const [errors, setErrors] = useState([]);
     const history = useHistory()
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [showCrtSpotModal, setShowCrtSpotModal] = useState(true)
+    const [showCrtSpotModal, setShowCrtSpotModal] = useState(false)
 const handleSubmit = (e)  => {
     e.preventDefault();
     setErrors([]);
