@@ -79,6 +79,9 @@ const SpotDetail = () => {
     setShowDeleteSpotModal(true)
   };
 
+
+
+
   useEffect(() => {
     setIsLoaded(true);
     dispatch(getOneSpot(spotId));
@@ -174,6 +177,7 @@ const SpotDetail = () => {
             <div className="singleSpot-imgContainer">
               <div>
                 <img
+                  onError={(e)=> e.currentTarget.src = defaultPic}
                   className="mainSpot-img"
                   src={currentSpot?.SpotImages?.[0]?.url}
                 />

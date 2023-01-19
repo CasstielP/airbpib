@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import defaultPic from '../SingleSpotPage/yuccavalley.png'
 const SpotCard = ({ spot }) => {
   return (
     <Link
@@ -7,7 +7,10 @@ const SpotCard = ({ spot }) => {
       to={`/spots/${spot.id}`}
     >
       <div className="spotCard-box">
-        <img src={spot.previewImage} className="preview-img" />
+        <img
+        onError={(e)=> e.currentTarget.src = defaultPic}
+        src={spot.previewImage}
+        className="preview-img" />
         <div className="spotcard-content">
           <div className="spc-info-left">
             <div className="bold">
