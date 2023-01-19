@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
 
 const CreateSpotModal = ({showCrtSpotModal, setShowCrtSpotModal}) => {
-
+    const history = useHistory()
 
     return(
         <>
         {
             showCrtSpotModal &&
             <Modal
-            onClose={()=> setShowCrtSpotModal(false)}
+            onClose={()=> history.push('/user')}
             >
                 <div className='cr_spt_modal_container'>
                     <div className='cr_spt_modal_wrapper'>

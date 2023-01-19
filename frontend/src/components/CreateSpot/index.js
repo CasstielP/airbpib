@@ -20,7 +20,7 @@ function CreateSpotFormPage() {
     const [errors, setErrors] = useState([]);
     const history = useHistory()
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [showCrtSpotModal, setShowCrtSpotModal] = useState(false)
+    const [showCrtSpotModal, setShowCrtSpotModal] = useState(true)
 const handleSubmit = (e)  => {
     e.preventDefault();
     setErrors([]);
@@ -37,8 +37,13 @@ const handleSubmit = (e)  => {
     if (!name.length ) Errors.push("please enter a valid name")
     if (!description.length) Errors.push("please enter a valid description")
     if (!price || price <=0) Errors.push("please enter a valid price")
-    if (!image.includes(".jpg"||".jpeg"||".png"||".gif")) Errors.push("please enter a valid image url")
-    if (!image) Errors.push("please enter a valid image url")
+    if (!image) {
+      Errors.push("You must enter a image url")
+    }else{
+      if (!image.toLowerCase().includes(".jpg"||".jpeg"||".png"||".gif")) {
+        Errors.push("please enter a valid image url")
+      }
+    }
 
     setErrors(Errors)
     if(Errors.length >0) {
@@ -70,9 +75,9 @@ const handleSubmit = (e)  => {
           dispatch(spotActions.createSpotImage(imageData, response.id))
           setShowCrtSpotModal(true)
         })
-        .then(()=>{
-            history.push('/')
-          })
+        // .then(()=>{
+        //     history.push('/')
+        //   })
 }
 
 const handleCancel = (e) => {

@@ -10,7 +10,7 @@ import SpotDetail from "./components/SingleSpotPage";
 import ProfilePage from "./components/Profile";
 import EditSpotPage from "./components/EditSpot";
 import DeleteSpotForm from "./components/DeleteSpot";
-import UserSpots from "./components/SpotList/userSpotPage";
+// import UserSpots from "./components/SpotList/userSpotPage";
 
 function App() {
   const dispatch = useDispatch();

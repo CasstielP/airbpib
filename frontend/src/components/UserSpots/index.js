@@ -7,6 +7,7 @@ import * as spotActions from "../../store/spot";
 import EditSpotModal from "../EditSpot/editSpotModal";
 import EditSpotPage from "../EditSpot";
 import "../Profile/profilePage.css";
+import defaultPic from '../SingleSpotPage/yuccavalley.png'
 const UserSpots = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -45,7 +46,10 @@ const UserSpots = () => {
             to={`/spots/${spot.id}`}
           >
             <div className="spotCard-box">
-              <img src={spot.previewImage} className="preview-img" />
+              <img
+              onError={(e)=> e.currentTarget.src = defaultPic}
+              src={spot.previewImage}
+              className="preview-img" />
               <div className="spotcard-content">
                 <div className="spc-info-left">
                 <div className="bold">
