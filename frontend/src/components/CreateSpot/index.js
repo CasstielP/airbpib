@@ -37,8 +37,13 @@ const handleSubmit = (e)  => {
     if (!name.length ) Errors.push("please enter a valid name")
     if (!description.length) Errors.push("please enter a valid description")
     if (!price || price <=0) Errors.push("please enter a valid price")
-    if (!image.length || image.length > 255 || !image.includes(".jpg"||".jpeg"||".png"||".gif")) Errors.push("please enter a valid image url less than 255 characters long")
+    // if (!image.includes(".jpg"||".jpeg"||".png"||".gif")) Errors.push("please enter a valid image url")
+    if (!image) Errors.push("please enter a valid image url")
+
     setErrors(Errors)
+    if(Errors.length >0) {
+      return
+    }
 
 
     const payload = {
@@ -49,10 +54,20 @@ const handleSubmit = (e)  => {
 
 
 
-    dispatch(spotActions.createSpot(payload))
-        .then((response)=> {
+    dispatch(spotActions.createSpot(payload)).catch(
+      async(res)=> {
+        const message = await res.json()
+        const newSpotErrors = []
+        if(message){
+          console.log('msgmsgmsgmsgmsgmsgmsg', message)
+          newSpotErrors.push(message.errors)
+          setErrors(newSpotErrors)
+          return
+        }
+      }
+    )
+    .then((response)=> {
           dispatch(spotActions.createSpotImage(imageData, response.id))
-          // alert('Sccessully Created New Spot')
           setShowCrtSpotModal(true)
         })
         .then(()=>{
@@ -166,7 +181,7 @@ return (
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                   placeholder='add image here'
-                  required
+                  // required
                 />
               </label>
               <button className="submit-button" type="submit">Create</button>

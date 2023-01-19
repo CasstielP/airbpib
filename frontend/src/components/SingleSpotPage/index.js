@@ -17,6 +17,7 @@ import key from "./key.png";
 import aircover from "./aircover.png";
 import BkComfirmationModal from "../BkConfmModal";
 import DeleteSpotModal from "../DeleteSpot/DeleteSpotModal";
+import defaultPic from './yuccavalley.png'
 
 const SpotDetail = () => {
   const { spotId } = useParams();
@@ -181,19 +182,27 @@ const SpotDetail = () => {
               <div className="subImg-container">
                 <img
                   className="subspot-image"
-                  src={currentSpot?.SpotImages?.[1]?.url}
+                  src={(currentSpot?.SpotImages?.[1]?.url)?
+                    currentSpot?.SpotImages?.[1]?.url: defaultPic
+                  }
                 />
                 <img
                   className="subspot-image"
-                  src={currentSpot?.SpotImages?.[2]?.url}
+                  src={(currentSpot?.SpotImages?.[2]?.url)?
+                    currentSpot?.SpotImages?.[2]?.url: defaultPic
+                  }
                 />
                 <img
                   className="subspot-image"
-                  src={currentSpot?.SpotImages?.[3]?.url}
+                  src={(currentSpot?.SpotImages?.[3]?.url)?
+                    currentSpot?.SpotImages?.[3]?.url: defaultPic
+                  }
                 />
                 <img
                   className="subspot-image"
-                  src={currentSpot?.SpotImages?.[4]?.url}
+                  src={(currentSpot?.SpotImages?.[4]?.url)?
+                    currentSpot?.SpotImages?.[4]?.url: defaultPic
+                  }
                 />
               </div>
             </div>
