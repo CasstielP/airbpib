@@ -187,26 +187,30 @@ const SpotDetail = () => {
                 <img
                   className="subspot-image"
                   src={(currentSpot?.SpotImages?.[1]?.url)?
-                    currentSpot?.SpotImages?.[1]?.url: defaultPic
+                    currentSpot?.SpotImages?.[1]?.url : defaultPic
                   }
                 />
                 <img
                   className="subspot-image"
                   src={(currentSpot?.SpotImages?.[2]?.url)?
-                    currentSpot?.SpotImages?.[2]?.url: defaultPic
+                    currentSpot?.SpotImages?.[2]?.url : defaultPic
                   }
                 />
                 <img
                   className="subspot-image"
                   src={(currentSpot?.SpotImages?.[3]?.url)?
-                    currentSpot?.SpotImages?.[3]?.url: defaultPic
+                    currentSpot?.SpotImages?.[3]?.url : defaultPic
                   }
                 />
                 <img
                   className="subspot-image"
                   src={(currentSpot?.SpotImages?.[4]?.url)?
-                    currentSpot?.SpotImages?.[4]?.url: defaultPic
-                  }
+                    currentSpot?.SpotImages?.[4]?.url : defaultPic}
+                    onError={(e)=> {
+                      if (e.target.src !== defaultPic) {
+                          e.target.src = defaultPic
+                      }
+                    }}
                 />
               </div>
             </div>
